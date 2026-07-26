@@ -232,7 +232,7 @@ table.ft tr:hover td{background:#F0FDFA;}
 </div>
 <header class="app-header">
   <h1>심전도 감시 차팅 예시 <span>— 실시간 원격 심전도 감시 처방 근거 (EX871)</span></h1>
-  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v4.0 Pro</span></div>
+  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v5.0 Pro</span></div>
 </header>
 <div class="app-body">
 <aside class="ref-panel">
@@ -251,7 +251,7 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div id="refList"></div>
 </aside>
 <main class="gen-panel">
-  <div class="gen-title">자동 차팅 멘트 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v4.0 Pro</span></div>
+  <div class="gen-title">자동 차팅 멘트 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v5.0 Pro</span></div>
   <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 차팅 멘트가 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 차팅 예시 영역에 함께 표시됩니다.</div>
 
   <div class="stats">
@@ -542,6 +542,16 @@ const GUIDELINES = {
       tags: ["호흡기내과", "내과계"]
     },
     {
+      org: "AASM / AHA",
+      year: 2021,
+      class: "권고",
+      level: "",
+      title: "폐쇄성 수면무호흡증과 심혈관 위험 관리",
+      text: "OSA 환자의 야간 서맥 유병률은 69.8%에 달하며, 지속성 AF 발작의 약 75%가 야간(오후 8시~오전 8시)에 발생. 서맥성 부정맥 환자 전원에서 OSA 스크리닝 권고, OSA 환자에서도 부정맥 감시 권장.",
+      source: "AASM Clinical Practice Guideline / AHA Scientific Statement on Sleep Apnea and CV Disease. 2021",
+      tags: ["호흡기내과", "내과계"]
+    },
+    {
       org: "ERS/ESC",
       year: 2023,
       class: "Task Force Statement",
@@ -619,9 +629,82 @@ const GUIDELINES = {
       class: "Class I",
       level: "Level C",
       title: "Cardio-Oncology 가이드라인 (2022 ESC)",
-      text: "Anthracycline·Trastuzumab·TKI·면역항암제 등 심독성 항암제 투여 환자는 baseline ECG, 투여 중 정기적 ECG, QTc 평가 권고. 고위험 항암제(특히 TKI) 환자는 연속 심전도 감시 강력 권고.",
+      text: "Anthracycline·Trastuzumab·TKI·면역관문억제제 등 심독성 항암제 투여 환자는 baseline ECG, 투여 중 정기적 ECG, QTc 평가 권고. 고위험 항암제(특히 TKI) 환자는 연속 심전도 감시 강력 권고.",
       source: "Lyon AR, et al. 2022 ESC Guidelines on cardio-oncology. Eur Heart J. 2022;43:4229-4361",
       tags: ["혈액종양내과", "내과계"]
+    },
+    {
+      org: "ASCO",
+      year: 2021,
+      class: "권고",
+      level: "",
+      title: "면역관문억제제 이상반응 관리 가이드라인 (irAE)",
+      text: "ICI 연관 심근염 의심 시 즉시 항암제 중단 및 입원, 연속 심전도 감시 하 고용량 스테로이드 치료 권고. 심근염 grade에 따른 관리 알고리즘 제시.",
+      source: "Schneider BJ, et al. ASCO Guideline: Management of Immune-Related Adverse Events. J Clin Oncol. 2021",
+      tags: ["혈액종양내과", "내과계"]
+    },
+    {
+      org: "ASTCT / EBMT",
+      year: 2023,
+      class: "권고",
+      level: "",
+      title: "CAR-T 치료 후 CRS 관리 및 모니터링 권고",
+      text: "CRS grade 2 이상 환자(전체 CAR-T 환자의 약 40%)는 연속 심전도 telemetry 및 pulse oximetry 감시 권고. 부정맥 발생률이 54%에 달하므로 감시가 필수적.",
+      source: "ASTCT Consensus Grading for CRS and Neurologic Toxicity / EBMT-JACIE CAR-T Handbook. 2023",
+      tags: ["혈액종양내과", "내과계"]
+    },
+    {
+      org: "ESMO",
+      year: 2020,
+      class: "권고",
+      level: "",
+      title: "플루오로피리미딘 심독성 관리 권고",
+      text: "5-FU·카페시타빈 투여 중 흉통 발생 시 즉시 투여 중단 및 심전도 확인. 관상동맥 연축의 90%가 첫 3회 투여 중 발생하므로 초기 사이클의 집중 감시 권고.",
+      source: "ESMO Clinical Practice Guidelines: Cardiovascular toxicity of cancer therapy. Ann Oncol. 2020",
+      tags: ["혈액종양내과", "내과계"]
+    },
+  ],
+
+  "요양병원 · 장기요양": [
+    {
+      org: "ESC",
+      year: 2024,
+      class: "Class IIa",
+      level: "Level B",
+      title: "고령자 심방세동 스크리닝 (2024 ESC AF Guidelines)",
+      text: "75세 이상 또는 CHA₂DS₂-VA 위험인자를 동반한 65세 이상에서 장기 비침습적 ECG 기반 스크리닝 권고. 요양병원 입원 고령자는 이 기준에 대부분 해당하며, AF 유병률이 29.6~32.5%로 지역사회 대비 현저히 높음.",
+      source: "Van Gelder IC, et al. 2024 ESC Guidelines for the management of AF. Eur Heart J. 2024;45:3314-3414",
+      tags: ["요양병원", "노인의학과", "기타"]
+    },
+    {
+      org: "AGS",
+      year: 2023,
+      class: "Beers Criteria",
+      level: "",
+      title: "고령자 잠재적 부적절 약물 처방 기준 (AGS Beers Criteria)",
+      text: "요양시설 고령자 다약제 복용 시 QT 연장 위험 약물 상호작용 평가 권고. 치매 BPSD에 대한 항정신병제 사용은 심혈관 사망 위험 증가와 연관되어 신중 사용 권고.",
+      source: "AGS 2023 Updated Beers Criteria. J Am Geriatr Soc. 2023;71:2052-2081",
+      tags: ["요양병원", "노인의학과", "기타"]
+    },
+    {
+      org: "NICE",
+      year: 2017,
+      class: "권고",
+      level: "",
+      title: "영양지원 및 재급식증후군 예방 가이드라인",
+      text: "재급식증후군 고위험 환자(장기 금식·중증 영양불량·경관영양 개시)는 5-10 kcal/kg/day 저속 개시 및 연속 심전도 감시를 통한 부정맥·심부전 조기 감지 권고.",
+      source: "NICE Clinical Guideline CG32: Nutrition support for adults. 2017 update",
+      tags: ["요양병원", "기타"]
+    },
+    {
+      org: "AMDA",
+      year: 2022,
+      class: "권고",
+      level: "",
+      title: "장기요양시설 심방세동 관리 (Society for Post-Acute and Long-Term Care Medicine)",
+      text: "장기요양 거주자의 AF는 상당수가 미진단 상태이며, 진단 시 뇌졸중 위험이 1.55배 증가. 항응고 치료 여부 결정을 위한 정확한 리듬 진단이 선행되어야 함.",
+      source: "AMDA — The Society for Post-Acute and Long-Term Care Medicine Clinical Practice Guideline. 2022",
+      tags: ["요양병원", "기타"]
     },
   ],
 
@@ -634,6 +717,16 @@ const GUIDELINES = {
       title: "고령 정신과 환자의 QTc 모니터링 권고",
       text: "고령 환자에서 항정신병제 등 QTc 연장 가능 약물 투여 시 baseline 및 추적 ECG 측정, 고위험군은 연속 ECG 감시 권고. QTc>500ms 또는 baseline 대비 25% 이상 증가 시 약물 조정 검토.",
       source: "American Association of Geriatric Psychiatry Position Statement on QTc. 2021",
+      tags: ["정신건강의학과"]
+    },
+    {
+      org: "ASAM",
+      year: 2020,
+      class: "권고",
+      level: "",
+      title: "알코올 금단 관리 임상 진료 지침 (American Society of Addiction Medicine)",
+      text: "중증 알코올 금단·진전섬망 환자는 QTc 연장(46.8%) 및 저칼륨·저마그네슘혈증 동반 치명적 부정맥 위험. 입원 시 baseline ECG 및 연속 감시 권고, Haloperidol 등 QT 연장 약물 병용 시 각별한 주의 필요.",
+      source: "ASAM Clinical Practice Guideline on Alcohol Withdrawal Management. J Addict Med. 2020",
       tags: ["정신건강의학과"]
     },
     {
@@ -1135,6 +1228,16 @@ const DATA = {
         ],
         core:"활동성 폐결핵 또는 Aspergillosis 등 만성 폐감염 환자로, Lancet Respir Med(2021)에 따르면 Bedaquiline 등 항결핵제 투여 시 QTc 연장 위험이 있어 연속 ECG 감시가 권고됨. 약물 유발 부정맥 및 감염성 심막염 합병증의 실시간 감시를 위해"
       },
+      "폐쇄성 수면무호흡증 (OSA)": {
+        refs:[
+          {title:"Prevalence, types and treatment of bradycardia in obstructive sleep apnea — systematic review and meta-analysis",journal:"Sleep Medicine Reviews",year:2021,finding:"OSA 환자 야간 서맥 유병률 69.8%, 주간 25%. 서맥 환자의 56.8%가 OSA 동반"},
+          {title:"Obstructive sleep apnea and cardiac arrhythmias",journal:"Ann Thorac Med / PMC",year:2010,finding:"AHI ≥5 환자 CABG 후 POAF 발생률 32% vs 비OSA 18%. 지속성 AF 발작의 약 75%가 오후 8시~오전 8시 사이 발생"},
+          {title:"Obstructive Sleep Apnea as a Predictor of Arrhythmias in 24-h ECG Holter Monitoring",journal:"J Clin Med",year:2021,finding:"OSA 환자에서 부정맥 위험 증가 확인, 정기적 홀터 감시가 조기 예방·치료에 기여"},
+          {title:"Prevalence and Diagnosis of OSA in Atrial Fibrillation Patients: A Systematic Review",journal:"J Clin Med",year:2025,finding:"AF 환자의 OSA 유병률 5~90%(대부분 60% 이상), 증상 경미·인식 부족으로 과소진단"},
+          {title:"2023 ACC/AHA/ACCP/HRS AF Guideline — sleep-disordered breathing screening",journal:"Circulation",year:2024,finding:"AF 환자에서 수면호흡장애 스크리닝 권고, CPAP 치료가 AF 재발률 감소에 기여"},
+        ],
+        core:"폐쇄성 수면무호흡증(OSA) 진단 또는 의심 환자로, Sleep Medicine Reviews(2021) 메타분석에 따르면 OSA 환자의 야간 서맥 유병률이 69.8%(주간 25%)에 달하고, 서맥 환자의 56.8%가 OSA를 동반함. 또한 지속성 심방세동 발작의 약 75%가 오후 8시~오전 8시 야간 시간대에 집중 발생하여(Ann Thorac Med, 2010) 주간 단발성 심전도만으로는 포착이 어려움. AF 환자의 OSA 유병률은 대부분 60% 이상으로 보고되나 증상이 경미하여 과소진단되는 경향이 있으며(J Clin Med, 2025), 2023 ACC/AHA/ACCP/HRS AF 가이드라인은 AF 환자의 수면호흡장애 스크리닝을 권고함. 야간 저산소증에 의한 서맥·심정지 및 야간 발작성 심방세동의 24시간 연속 포착을 위해"
+      },
     }
   },
 
@@ -1237,27 +1340,77 @@ const DATA = {
     color:"#9B59B6",
     category:"내과계",
     groups: {
-      "심독성 항암제 투여 환자": {
+      "안트라사이클린계 항암제 투여 환자": {
         refs:[
-          {title:"Cardiotoxicity of anthracyclines",journal:"JACC: CardioOncology",year:2022,finding:"Doxorubicin → 심근병증, 5-FU → 관상동맥 연축, QT 연장 다수"},
-          {title:"2022 ESC Guidelines on cardio-oncology",journal:"Eur Heart J (ESC)",year:2022,finding:"고위험 항암제 투여 중 연속 ECG 감시 및 baseline/추적 QTc 평가 권고"},
-          {title:"TKI-induced QT prolongation",journal:"JACC: CardioOncology",year:2021,finding:"TKI(Tyrosine kinase inhibitor) 다수 QT 연장 유발, 연속 감시 필수"},
+          {title:"Anthracycline-induced cardiotoxicity — incidence and dose-dependency",journal:"JACC: CardioOncology",year:2022,finding:"Doxorubicin 누적용량 400mg/m² 초과 시 심근병증 발생률 5%, 550mg/m² 초과 시 26%까지 증가"},
+          {title:"2022 ESC Guidelines on cardio-oncology",journal:"Eur Heart J (ESC)",year:2022,finding:"고위험 항암제 투여 중 baseline·추적 ECG 및 QTc 평가 권고(Class I), 고위험군 연속 감시 권고"},
+          {title:"Arrhythmias during anthracycline therapy",journal:"Heart Rhythm",year:2021,finding:"안트라사이클린 투여 중 상심실성·심실성 부정맥 및 QTc 연장 발생, 투여 직후 급성기 위험 최대"},
+          {title:"Early detection of anthracycline cardiotoxicity",journal:"Circulation",year:2020,finding:"조기 무증상 심근 손상 감지 시 심보호 치료로 회복 가능, 지연 진단 시 비가역적 심부전 진행"},
         ],
-        core:"심독성 항암제(Anthracycline, 5-FU, TKI 등)를 투여 중인 환자로, 2022 ESC 카디오-온콜로지 가이드라인에 따라 고위험 항암제 투여 중 연속 심전도 감시가 권고되며, 관상동맥 연축·QT 연장·심근 손상 위험이 보고됨(JACC: CardioOncology, 2022). 심근 손상 및 부정맥의 조기 감지를 위해"
+        core:"안트라사이클린계 항암제(Doxorubicin, Epirubicin 등)를 투여 중인 환자로, JACC: CardioOncology(2022)에 따르면 Doxorubicin 누적용량 400mg/m² 초과 시 심근병증 발생률이 5%, 550mg/m² 초과 시 26%까지 상승하며, 투여 직후 급성기에 상심실성·심실성 부정맥 및 QTc 연장 위험이 최대임(Heart Rhythm, 2021). 2022 ESC 카디오-온콜로지 가이드라인은 고위험 항암제 투여 중 연속 심전도 감시를 권고하고 있으며, Circulation(2020)에 따르면 무증상 심근 손상을 조기에 감지할 경우 심보호 치료로 회복이 가능하나 진단이 지연되면 비가역적 심부전으로 진행함. 무증상 심근 손상 및 부정맥의 조기 포착을 통한 항암 치료 중단·용량 조절 판단을 위해"
       },
-      "조혈모세포이식 후 환자": {
+      "면역관문억제제(ICI) 투여 환자": {
         refs:[
-          {title:"Cardiac complications after HSCT",journal:"Bone Marrow Transplant",year:2021,finding:"HSCT 후 심근 손상·부정맥 발생 위험 증가, conditioning regimen과 연관"},
-          {title:"Arrhythmias post allogeneic stem cell transplant",journal:"Blood Advances",year:2020,finding:"동종 이식 후 AF 발생률 10~15%, 예후 악화와 연관"},
+          {title:"ICI-associated myocarditis — incidence and fatality",journal:"Front Immunol / Cardio-Oncology",year:2025,finding:"ICI 연관 심근염 발생률 약 1%이나 치명률 40~50%, 치명적 부정맥·심인성 쇼크로 급속 진행"},
+          {title:"Immune Checkpoint Inhibitor Myocarditis: Pathophysiology, Diagnosis, Treatment",journal:"JAHA (AHA)",year:2020,finding:"ICI 심근염 환자 최대 30%에서 심방세동 동반, PR 연장·AV block·심실성 부정맥·빈번한 PVC가 진단 단서"},
+          {title:"ICI-Related Myocarditis: Case Series and Literature Review",journal:"J Cardiol Cases",year:2024,finding:"증상 있는 ICI 심근염 환자 전원에서 급성기 연속 ECG 감시 권고, 완전 방실차단·심실성 부정맥 발생 시 30일 사망률 유의 증가"},
+          {title:"Electrocardiographic Manifestations of ICI Myocarditis",journal:"medRxiv / Circulation",year:2021,finding:"ICI 심근염 환자 15.1%에서 30일 내 페이스메이커·ICD 삽입, telemetry 이벤트가 예후 예측"},
+          {title:"ICI myocarditis rechallenge and monitoring protocol",journal:"Cancers (MDPI)",year:2023,finding:"ICI 심근염 의심 시 즉시 항암제 중단 및 입원 후 연속 ECG 감시 하 고용량 스테로이드 치료 권고"},
         ],
-        core:"조혈모세포이식(HSCT) 후 환자로, Bone Marrow Transplant(2021)에 따르면 conditioning regimen 및 이식편대숙주반응에 의한 심근 손상·부정맥 발생 위험이 증가함. 이식 후 조기 심혈관 합병증의 감시를 위해"
+        core:"면역관문억제제(ICI; Pembrolizumab, Nivolumab, Atezolizumab 등)를 투여 중인 환자로, 최근 문헌(Front Immunol, 2025)에 따르면 ICI 연관 심근염은 발생률이 약 1%로 낮으나 치명률이 40~50%에 달하며 치명적 부정맥·심인성 쇼크로 급속히 진행함. JAHA(AHA, 2020)에 따르면 ICI 심근염 환자의 최대 30%에서 심방세동이 동반되고, PR 간격 연장·방실차단·심실성 부정맥·빈번한 심실조기수축이 조기 진단의 핵심 단서로 보고됨. 또한 환자의 15.1%가 30일 내 페이스메이커 또는 ICD 삽입을 필요로 하였음(2021). 국제 문헌은 증상 있는 ICI 심근염 환자 전원에서 급성기 연속 심전도 감시를 권고하고 있음. 치명적 전도 장애 및 심실성 부정맥의 실시간 포착을 통한 조기 스테로이드 치료 개시 판단을 위해"
+      },
+      "CAR-T 세포치료 환자": {
+        refs:[
+          {title:"Cardiac adverse events after CAR T-cell therapies — systematic review and meta-analysis",journal:"Cardio-Oncology (Springer)",year:2024,finding:"CAR-T 치료 후 부정맥 발생률 54%, 심부전 30%, 심근병증 20%, 급성 관동맥 증후군 10%, 심정지 7%"},
+          {title:"Cardiotoxicity of CAR-T: CRS-mediated mechanisms",journal:"J Clin Med",year:2022,finding:"CRS(사이토카인 방출 증후군) grade 2 이상 환자에서 심혈관 이벤트 위험 2.36배(RR 2.36, 95% CI 1.86-2.99)"},
+          {title:"Cardiotoxic Effects Following CAR-T Cell Therapy: A Literature Review",journal:"Curr Oncol Rep",year:2025,finding:"CAR-T 후 저혈압·빈맥·심방세동·심근염·심정지 등 다양한 심혈관 이벤트, CRS grade 2↑에서 유의하게 증가"},
+          {title:"Cardiovascular disease and CAR T cellular therapy",journal:"Front Cardiovasc Med",year:2022,finding:"CRS는 CAR-T 환자의 70~90%에서 발생하며 약 40%가 grade 2 이상, 트로포닌 상승·부정맥·혈역학적 불안정 초래"},
+          {title:"CAR-T monitoring protocol — continuous telemetry recommendation",journal:"Blood Advances",year:2023,finding:"CRS grade 2 이상 환자는 연속 심전도 telemetry 및 pulse oximetry 감시 권고"},
+        ],
+        core:"CAR-T 세포치료를 시행한 환자로, Cardio-Oncology(2024) 메타분석에 따르면 CAR-T 치료 후 부정맥 발생률이 54%에 달하고 심부전 30%, 심근병증 20%, 심정지 7%가 보고됨. 사이토카인 방출 증후군(CRS)은 환자의 70~90%에서 발생하며 이 중 약 40%가 grade 2 이상이고, grade 2 이상 CRS 환자에서 심혈관 이벤트 위험이 2.36배 증가함(RR 2.36, 95% CI 1.86-2.99). 국제 프로토콜은 CRS grade 2 이상 환자에서 연속 심전도 telemetry 감시를 권고하고 있음. CRS 유발 빈맥·심방세동·심근 손상 및 혈역학적 붕괴의 실시간 포착을 위해"
+      },
+      "플루오로피리미딘(5-FU/카페시타빈) 투여 환자": {
+        refs:[
+          {title:"The Incidence, Risk Factors, and Outcomes With 5-FU–Associated Coronary Vasospasm",journal:"JACC: CardioOncology",year:2021,finding:"5-FU 관상동맥 연축 환자의 약 90%가 첫 3회 투여 중 발생(70% 이상이 첫 사이클), 95% 이상이 흉통 호소, 70% 이상에서 ST/T 변화"},
+          {title:"The puzzling clinical presentation of fluoropyrimidines cardiotoxicity",journal:"Front Cardiovasc Med",year:2022,finding:"5-FU 심독성 환자 ECG 허혈 소견 6~33%, 부정맥 최대 81.6%, 심정지·사망 최대 13% 보고"},
+          {title:"Cardiotoxicity from Capecitabine Chemotherapy: Prospective Study",journal:"The Oncologist",year:2022,finding:"카페시타빈 투여 환자 192명 중 16.7%(32명)에서 심독성 확인 — 안정 시 6명, 운동 시 26명"},
+          {title:"Cardiotoxicity of 5-FU and capecitabine in Chinese patients: prospective study",journal:"Cancer Chemother Pharmacol",year:2018,finding:"527명 전향적 연구에서 무증상 ECG 이상부터 중증 심근경색까지 다양한 심독성 확인"},
+          {title:"Continuous ambulatory ECG monitoring during fluorouracil therapy: a prospective study",journal:"J Clin Oncol",year:1989,finding:"5-FU 투여 중 연속 외래 심전도 감시가 무증상 허혈성 변화 포착에 유효함을 최초 입증"},
+        ],
+        core:"플루오로피리미딘계 항암제(5-FU, 카페시타빈) 투여 환자로, JACC: CardioOncology(2021)에 따르면 5-FU 유발 관상동맥 연축의 약 90%가 첫 3회 투여 중(70% 이상이 첫 사이클) 집중적으로 발생하며, 95% 이상이 흉통을 호소하고 70% 이상에서 ST/T 변화가 관찰됨. Front Cardiovasc Med(2022) 종합 리뷰에 따르면 5-FU 심독성 환자의 ECG 허혈 소견은 6~33%, 부정맥은 최대 81.6%, 심정지·사망은 최대 13%까지 보고됨. 카페시타빈의 경우 전향적 연구에서 16.7%의 심독성 발생률이 확인되었으며 대부분이 안정 시가 아닌 활동 중 발생함(The Oncologist, 2022). 투여 초기 사이클의 관상동맥 연축성 허혈 및 부정맥의 실시간 포착을 통한 즉각적 항암제 중단·칼슘길항제 투여 판단을 위해"
+      },
+      "TKI·표적치료제 투여 환자": {
+        refs:[
+          {title:"TKI-induced QT prolongation and arrhythmia",journal:"JACC: CardioOncology",year:2021,finding:"다수 TKI(Nilotinib, Vandetanib, Sunitinib 등)가 QT 연장 유발, Torsades de Pointes 위험"},
+          {title:"Ibrutinib-associated atrial fibrillation",journal:"Blood",year:2020,finding:"Ibrutinib 투여 환자 심방세동 발생률 4~16%, 일반인 대비 유의하게 높음"},
+          {title:"VEGF inhibitor cardiovascular toxicity",journal:"Eur Heart J",year:2022,finding:"VEGF 억제제 투여 환자 고혈압·심부전·허혈성 이벤트 위험 증가"},
+          {title:"2022 ESC cardio-oncology — TKI monitoring",journal:"Eur Heart J (ESC)",year:2022,finding:"QT 연장 유발 TKI 투여 시 baseline 및 추적 QTc 측정, 고위험군 연속 감시 권고"},
+        ],
+        core:"TKI(Tyrosine Kinase Inhibitor) 또는 표적치료제를 투여 중인 환자로, JACC: CardioOncology(2021)에 따르면 다수의 TKI(Nilotinib, Vandetanib, Sunitinib 등)가 QT 간격 연장을 유발하여 Torsades de Pointes 위험을 높이며, Blood(2020)에 따르면 Ibrutinib 투여 환자의 심방세동 발생률은 4~16%로 일반인 대비 유의하게 높음. 2022 ESC 카디오-온콜로지 가이드라인은 QT 연장 유발 TKI 투여 시 고위험군 연속 감시를 권고함. 약물 유발 QTc 연장 및 신규 심방세동의 조기 포착을 통한 용량 조절·항응고 개시 판단을 위해"
+      },
+      "조혈모세포이식(HSCT) 후 환자": {
+        refs:[
+          {title:"Cardiac complications after HSCT",journal:"Bone Marrow Transplant",year:2021,finding:"HSCT 후 심근 손상·부정맥 발생 위험 증가, conditioning regimen(고용량 Cyclophosphamide 등)과 연관"},
+          {title:"Arrhythmias post allogeneic stem cell transplant",journal:"Blood Advances",year:2020,finding:"동종 이식 후 AF 발생률 10~15%, 예후 악화 및 이식 관련 사망률 증가와 연관"},
+          {title:"Cyclophosphamide cardiotoxicity in transplant conditioning",journal:"Biol Blood Marrow Transplant",year:2019,finding:"고용량 Cyclophosphamide conditioning 후 출혈성 심근염·부정맥 발생 가능"},
+        ],
+        core:"조혈모세포이식(HSCT)을 시행한 환자로, Blood Advances(2020)에 따르면 동종 이식 후 심방세동 발생률이 10~15%에 달하며 이식 관련 사망률 증가와 유의하게 연관됨. 또한 고용량 Cyclophosphamide 등 conditioning regimen에 의한 출혈성 심근염·부정맥 발생 위험이 보고됨(Biol Blood Marrow Transplant, 2019). 이식 전처치 및 생착 과정의 심근 손상·부정맥의 연속 감시를 위해"
       },
       "종양용해증후군 (TLS)": {
         refs:[
-          {title:"Tumor Lysis Syndrome — cardiac implications",journal:"Blood",year:2020,finding:"TLS에 의한 고칼륨혈증·저칼슘혈증이 치명적 부정맥 유발"},
-          {title:"Cairo-Bishop criteria and cardiac monitoring",journal:"Br J Haematol",year:2019,finding:"TLS 고위험군 연속 ECG 권고, 심실성 부정맥 조기 포착"},
+          {title:"Tumor Lysis Syndrome — cardiac implications",journal:"Blood",year:2020,finding:"TLS에 의한 급격한 고칼륨혈증·저칼슘혈증·고인산혈증이 치명적 부정맥 유발"},
+          {title:"Cairo-Bishop criteria and cardiac monitoring",journal:"Br J Haematol",year:2019,finding:"TLS 고위험군(고종양부담 혈액암, 급속 반응 종양) 연속 ECG 권고, 심실성 부정맥 조기 포착"},
+          {title:"TLS incidence in hematologic malignancies",journal:"J Clin Oncol",year:2021,finding:"고위험 혈액암 환자 TLS 발생률 최대 20%, 항암 개시 12~72시간 내 집중 발생"},
         ],
-        core:"종양용해증후군(TLS) 발생 또는 위험 환자로, Blood(2020)에 따르면 TLS 동반 급격한 고칼륨혈증·저칼슘혈증이 치명적 부정맥을 유발하며, Br J Haematol(2019) 가이드라인은 TLS 고위험군에서 연속 ECG 감시를 권고함. 전해질 변동에 의한 치명적 부정맥 예방을 위해"
+        core:"종양용해증후군(TLS) 발생 또는 고위험 환자로, J Clin Oncol(2021)에 따르면 고위험 혈액암 환자의 TLS 발생률이 최대 20%에 이르고 항암 치료 개시 후 12~72시간 내 집중 발생함. Blood(2020)에 따르면 TLS에 동반되는 급격한 고칼륨혈증·저칼슘혈증이 치명적 부정맥을 유발하며, Br J Haematol(2019) 가이드라인은 TLS 고위험군에서 연속 ECG 감시를 권고함. 항암 개시 직후 전해질 대혼란기의 치명적 부정맥 예방을 위해"
+      },
+      "진행성·전이성 암 (심낭 침범 / 암 관련 혈전)": {
+        refs:[
+          {title:"Cancer-associated atrial fibrillation",journal:"JACC: CardioOncology",year:2021,finding:"암 환자 신규 AF 발생 위험 일반인 대비 유의하게 증가, 진행성 암에서 더 높음"},
+          {title:"Malignant pericardial effusion and cardiac tamponade",journal:"Eur Heart J",year:2020,finding:"악성 심낭삼출 환자 저전압·전기적 교대맥(electrical alternans)·부정맥 위험"},
+          {title:"Cancer-associated thrombosis and pulmonary embolism",journal:"Blood",year:2022,finding:"암 환자 정맥혈전색전증 위험 4~7배 증가, 폐색전증에 의한 급성 우심부담·부정맥 위험"},
+        ],
+        core:"진행성·전이성 암 환자로, JACC: CardioOncology(2021)에 따르면 암 환자에서 신규 심방세동 발생 위험이 일반인 대비 유의하게 증가하며 진행성 암에서 더 높음. 또한 암 관련 정맥혈전색전증 위험이 4~7배 증가하여 폐색전증에 의한 급성 우심부담·부정맥 위험이 있고(Blood, 2022), 악성 심낭삼출 시 저전압·전기적 교대맥 등 특징적 심전도 변화 및 심장압전 위험이 보고됨(Eur Heart J, 2020). 암 관련 부정맥·혈전 이벤트 및 심낭 침범의 조기 포착을 위해"
       },
     }
   },
@@ -1281,6 +1434,16 @@ const DATA = {
           {title:"CredibleMeds list and real-world QT prolongation",journal:"Pharmacoepidemiol Drug Saf",year:2022,finding:"CredibleMeds 고위험 약물 복합 투여 환자 QTc 연장 유의하게 증가"},
         ],
         core:"QTc 연장 유발 가능 약물(항정신병제, TCA, SSRI, 항생제 등)을 복합 투여 중인 환자로, 약물 간 상가 효과에 의한 QTc 간격 연장 및 치명적 부정맥 위험이 보고됨. 약물 안전성 확보를 위해"
+      },
+      "알코올 금단 증후군 / 진전섬망(DT)": {
+        refs:[
+          {title:"Prolongation of the QTc interval during alcohol withdrawal syndrome",journal:"Acta Cardiologica",year:1997,finding:"알코올 금단 환자 62명 중 46.8%(29명)에서 QTc 연장(>440ms) 확인, 금단 증상 회복과 함께 정상화"},
+          {title:"Electrocardiographic Changes During and After Alcohol Withdrawal",journal:"Psychiatry Clin Psychopharmacol",year:2023,finding:"금주 직후 기간에 심장 부정맥 위험 증가, 연속 심전도 감시와 적시 금단 치료가 치명적 부정맥 예방에 기여"},
+          {title:"Life-Threatening Ventricular Tachyarrhythmias in Delirium Tremens",journal:"JAMA Internal Medicine",year:1977,finding:"진전섬망 환자에서 심실세동 발생 보고, 저칼륨·저마그네슘혈증 동반"},
+          {title:"Alcohol withdrawal syndrome: mechanisms, manifestations, and management",journal:"Acta Neurol Scand",year:2018,finding:"알코올 사용 및 금단이 QT 연장·심장 부정맥과 연관, 마그네슘 결핍 교정 필요. 항정신병제(Haloperidol) 사용 시 QT 연장 위험 가중"},
+          {title:"Acute coronary ischemia during alcohol withdrawal",journal:"J Med Case Reports",year:2011,finding:"알코올 금단 중 무증상 ST 변화 및 급성 관상동맥 이벤트·심장 돌연사 발생 보고"},
+        ],
+        core:"알코올 금단 증후군 또는 진전섬망(Delirium Tremens) 환자로, Acta Cardiologica(1997)에 따르면 알코올 금단 환자의 46.8%에서 QTc 연장(>440ms)이 확인되며 금단 증상 회복과 함께 정상화됨. Psychiatry Clin Psychopharmacol(2023)은 금주 직후 기간에 심장 부정맥 위험이 증가하므로 연속 심전도 감시와 적시 금단 치료가 치명적 부정맥 예방에 기여한다고 보고함. 또한 진전섬망 환자에서 저칼륨·저마그네슘혈증을 동반한 심실세동 발생이 보고되었으며(JAMA Intern Med), 금단 중 무증상 ST 변화 및 급성 관상동맥 이벤트·심장 돌연사 사례도 확인됨(2011). 진정 목적 Haloperidol 등 항정신병제 병용 시 QT 연장 위험이 가중됨. 금단기 QTc 연장 및 치명적 심실성 부정맥의 실시간 포착을 위해"
       },
     }
   },
@@ -1419,6 +1582,63 @@ const DATA = {
           {title:"Frailty and cardiac arrhythmias",journal:"J Gerontol",year:2021,finding:"노쇠 고령 환자 부정맥 발생률 증가 및 예후 악화와 연관"},
         ],
         core:"노쇠(Frailty) 또는 다약제 복용(≥5종) 고령 환자로, JAGS(2020)에 따르면 다약제 환자에서 QTc 연장 및 부정맥 위험이 유의하게 증가하며, 노쇠 자체가 부정맥 발생 및 예후 악화와 연관됨. 약물 관련 부정맥 및 기저 심혈관 이상의 연속 감시를 위해"
+      },
+    }
+  },
+
+  // ─────── 요양병원·장기요양 (Long-term Care Hospital) — 5 groups ───────
+  "요양병원 · 장기요양": {
+    color:"#0369A1",
+    category:"기타",
+    groups: {
+      "장기요양 입원 고령자 (무증상 AF 스크리닝)": {
+        refs:[
+          {title:"Epidemiology, risk profile, management, and outcome in geriatric patients with AF in two long-term care hospitals",journal:"Scientific Reports (Nature)",year:2022,finding:"요양병원 입원 고령자(평균 84.1세) AF 유병률 29.6~32.5%, CHA₂DS₂-VASc ≥2가 99%·≥4가 88%임에도 항응고제 처방은 48%에 불과"},
+          {title:"Prevalence and outcomes of atrial fibrillation in older people living in care homes in Wales (SAIL CARE-AF)",journal:"Age and Ageing",year:2022,finding:"요양시설 거주자 86,602명 분석 — AF 유병률 17.4%, AF 동반 시 허혈성 뇌졸중 위험 1.55배, 심혈관 사망 1.27배, 심혈관 입원 1.28배 증가"},
+          {title:"Prevalence of atrial fibrillation and outcomes in older long-term care residents: a systematic review",journal:"Age and Ageing",year:2021,finding:"장기요양 거주자 AF의 상당수가 미진단 상태, 정기 심전도 스크리닝 필요성 제기"},
+          {title:"Atrial fibrillation in long term care",journal:"JAMDA",year:2014,finding:"65세 이상 AF의 1/3이 미발견 상태로 남아 있으며, 장기요양시설 AF 유병률 7.5~17%"},
+          {title:"Screening for AF by digital health technology in older people in homecare settings",journal:"J Healthc Eng / PMC",year:2024,finding:"고령·다중이환·노쇠 환자에서 디지털 심전도 스크리닝의 실행 가능성 및 미진단 AF 발견 효과 확인"},
+          {title:"2024 ESC AF Guidelines — screening in ≥75 years",journal:"Eur Heart J (ESC)",year:2024,finding:"75세 이상 또는 CHA₂DS₂-VA 위험인자 동반 65세 이상에서 장기 ECG 스크리닝 권고(Class IIa, Level B)"},
+        ],
+        core:"요양병원에 장기 입원 중인 고령 환자로, Scientific Reports(Nature, 2022) 요양병원 코호트 연구에 따르면 입원 고령자(평균 84.1세)의 심방세동 유병률이 29.6~32.5%에 달하고, CHA₂DS₂-VASc 점수가 2점 이상인 환자가 99%·4점 이상이 88%임에도 실제 항응고제 처방률은 48%에 불과하여 상당수의 뇌졸중 고위험군이 미치료 상태로 방치되고 있음. 또한 Age and Ageing(2022) 대규모 연구(86,602명)에서 요양시설 거주자의 AF 유병률은 17.4%이며 AF 동반 시 허혈성 뇌졸중 위험이 1.55배, 심혈관 사망이 1.27배 증가함이 확인됨. JAMDA(2014)에 따르면 65세 이상 심방세동의 약 1/3이 미발견 상태로 남아 있어, 정기적 단발성 심전도만으로는 발작성 심방세동을 포착하기 어려움. 2024 ESC 가이드라인은 75세 이상 고령자에서 장기 ECG 스크리닝을 Class IIa로 권고하고 있음. 미진단 무증상 심방세동의 포착을 통한 항응고 치료 개시 및 뇌졸중 예방을 위해"
+      },
+      "경관영양(L-tube/PEG) 및 재급식증후군 위험 환자": {
+        refs:[
+          {title:"Management of Refeeding Syndrome in Medical Inpatients",journal:"J Clin Med",year:2019,finding:"재급식증후군은 저인산혈증·저칼륨혈증·저마그네슘혈증을 동반하며 치명적 부정맥 유발, 임상 현장에서 과소진단되는 경향"},
+          {title:"Refeeding syndrome: multimodal monitoring and clinical manifestation",journal:"Acta Neurochir",year:2020,finding:"재급식증후군 환자에서 대규모 부정맥 및 자율신경 조절 장애 확인, 심방세동 발생 및 전기적 심율동전환 필요"},
+          {title:"Refeeding Syndrome — continuous cardiac monitoring recommendation",journal:"NICE Guideline / Endocrinology Advisor",year:2024,finding:"재급식증후군 고위험 환자는 연속 심전도 감시 및 활력징후 평가로 부정맥·심부전·저혈압 조기 감지 필수"},
+          {title:"Acute complications due to refeeding syndrome induced by enteral nutrition",journal:"Nutrition",year:2009,finding:"경관영양 개시 후 급격한 인·칼륨·마그네슘 저하로 급성 호흡부전 및 부정맥 발생"},
+          {title:"Refeeding Syndrome Among Older Adults (RCT)",journal:"ClinicalTrials / Diakonhjemmet",year:2021,finding:"고령 영양불량 환자에서 경관영양 시 재급식증후군 위험 높음, NICE 권고 5-10 kcal/kg/day 저속 개시"},
+        ],
+        core:"경관영양(L-tube, PEG) 개시 또는 유지 중인 영양불량 고령 환자로, J Clin Med(2019)에 따르면 재급식증후군은 저인산혈증·저칼륨혈증·저마그네슘혈증을 동반하여 치명적 부정맥을 유발하나 임상 현장에서 과소진단되는 경향이 있음. Nutrition(2009) 및 Acta Neurochir(2020)에 따르면 경관영양 개시 후 급격한 전해질 이동으로 심방세동 등 대규모 부정맥 및 급성 호흡부전이 발생할 수 있으며, NICE 가이드라인은 재급식증후군 고위험 환자에서 연속 심전도 감시를 통한 부정맥·심부전 조기 감지를 필수로 권고함. 영양 개시 초기 전해질 급변에 따른 치명적 부정맥의 실시간 포착을 위해"
+      },
+      "반복 흡인성 폐렴 / 연하장애 환자": {
+        refs:[
+          {title:"Cardiac complications of pneumonia in the elderly",journal:"Lancet",year:2021,finding:"폐렴 후 30일 내 심근경색·심방세동·심부전 등 심혈관 이벤트 위험 유의하게 증가"},
+          {title:"New-onset AF in severe pneumonia",journal:"Chest",year:2018,finding:"중증 폐렴 환자 신규 AF 발생률 10~15%, 사망률·입원기간 증가와 연관"},
+          {title:"Aspiration pneumonia in long-term care residents",journal:"J Am Geriatr Soc",year:2020,finding:"요양시설 흡인성 폐렴 환자 저산소혈증에 의한 부정맥 및 심혈관 이벤트 위험 증가"},
+          {title:"Hypoxemia-induced arrhythmia in elderly patients",journal:"Age and Ageing",year:2021,finding:"고령 환자 저산소혈증 시 심방세동·심실성 부정맥 발생 위험 증가"},
+        ],
+        core:"연하장애로 흡인성 폐렴이 반복되는 요양병원 입원 환자로, Lancet(2021)에 따르면 폐렴 후 30일 내 심근경색·심방세동·심부전 등 심혈관 이벤트 위험이 유의하게 증가하며, Chest(2018)에 따르면 중증 폐렴 환자의 신규 심방세동 발생률이 10~15%에 이름. 또한 고령 환자에서 저산소혈증 발생 시 심방세동·심실성 부정맥 위험이 증가함이 보고됨(Age and Ageing, 2021). 반복적 저산소 이벤트에 따른 부정맥 및 심근 허혈의 실시간 감시를 위해"
+      },
+      "파킨슨병·신경퇴행성질환 (자율신경장애)": {
+        refs:[
+          {title:"Cardiac Changes in Parkinson's Disease: Clinical and Experimental Evidence",journal:"Int J Mol Sci",year:2021,finding:"파킨슨병 환자 교감신경 섬유 변성으로 기립성 저혈압·심박변이도 감소·심전도 변화 및 압반사 기능 저하 발생"},
+          {title:"Parkinson Disease and Orthostatic Hypotension in the Elderly: Risk Factors for Falls",journal:"J Clin Med / PMC",year:2020,finding:"파킨슨병 환자 기립성 저혈압 발생률 47~58%, 연간 43~68%가 1회 이상 낙상 경험, 일반 고령자 대비 낙상 위험 약 2배"},
+          {title:"Is it bradycardia or something else causing symptoms?",journal:"HeartRhythm Case Reports",year:2018,finding:"파킨슨병 자율신경 부전 환자에서 서맥·기립성 불내성 감별 어려움, 연속 심전도 감시가 페이스메이커 적응증 판단에 유용"},
+          {title:"Neurogenic Orthostatic Hypotension in Parkinson Disease and Lewy-body disorders",journal:"J Clin Med (MDPI)",year:2025,finding:"루이소체 질환·다계통위축증에서 자율신경 부전에 의한 심박수 반응 저하 및 혈압 조절 장애가 두드러짐"},
+        ],
+        core:"파킨슨병 또는 루이소체 치매·다계통위축증 등 신경퇴행성질환 입원 환자로, Int J Mol Sci(2021)에 따르면 교감신경 섬유 변성으로 기립성 저혈압·심박변이도 감소·심전도 변화 및 압반사 기능 저하가 발생함. 특히 파킨슨병 환자의 47~58%에서 기립성 저혈압이 관찰되고 연간 43~68%가 1회 이상 낙상을 경험하여 일반 고령자 대비 낙상 위험이 약 2배 높음(2020). HeartRhythm Case Reports(2018)에 따르면 자율신경 부전에 의한 서맥과 기립성 불내성의 감별이 임상적으로 어려워 연속 심전도 감시가 페이스메이커 적응증 판단에 유용함. 자율신경 부전에 의한 서맥·심박수 반응 저하 및 낙상 원인 감별을 위해"
+      },
+      "장기 와상 / BPSD 항정신병약 투여 요양 환자": {
+        refs:[
+          {title:"Antipsychotics and sudden cardiac death",journal:"NEJM (Ray et al.)",year:2009,finding:"항정신병 약물 투여 환자 QTc 연장·TdP·심장 돌연사 위험 2배 이상 증가, 용량 의존적"},
+          {title:"AGS 2023 Updated Beers Criteria",journal:"J Am Geriatr Soc",year:2023,finding:"고령자 다약제 복용 시 QT 연장 위험 약물 상호작용 평가 권고, 치매 BPSD에 대한 항정신병제 사용 신중 권고"},
+          {title:"Polypharmacy and QT prolongation in elderly",journal:"JAGS",year:2020,finding:"고령 다약제(≥5종) 환자 QTc 연장·부정맥 위험 유의하게 증가"},
+          {title:"Immobility, DVT and pulmonary embolism in bedridden patients",journal:"Thrombosis Research",year:2020,finding:"장기 와상 환자 심부정맥혈전증·폐색전증 위험 증가, 급성 우심부담에 의한 부정맥 위험"},
+          {title:"Antipsychotic use in nursing home residents with dementia",journal:"JAMA Intern Med",year:2021,finding:"요양시설 치매 환자 항정신병제 사용률 높으며 심혈관 사망 위험 증가와 연관"},
+        ],
+        core:"장기 와상 상태이거나 치매행동심리증상(BPSD)으로 항정신병 약물을 투여 중인 요양병원 환자로, NEJM(Ray et al., 2009)에 따르면 항정신병 약물 투여 환자에서 QTc 연장·Torsades de Pointes·심장 돌연사 위험이 2배 이상 용량 의존적으로 증가하며, JAMA Intern Med(2021)에 따르면 요양시설 치매 환자의 항정신병제 사용이 심혈관 사망 위험 증가와 연관됨. 또한 다약제(≥5종) 복용 고령자에서 QTc 연장·부정맥 위험이 유의하게 증가하고(JAGS, 2020), 장기 와상 환자는 심부정맥혈전증·폐색전증에 의한 급성 우심부담 및 부정맥 위험이 높음(Thrombosis Research, 2020). AGS Beers Criteria(2023)는 고령자 다약제 복용 시 QT 연장 위험 약물 상호작용 평가를 권고함. 약물 유발 QTc 연장 및 색전성 이벤트의 실시간 감시를 위해"
       },
     }
   },
