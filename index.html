@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 원격 심전도 감시 처방 근거 v5.0</title>
+<title>실시간 원격 심전도 감시 처방 근거 v5.1</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
@@ -232,7 +232,7 @@ table.ft tr:hover td{background:#F0FDFA;}
 </div>
 <header class="app-header">
   <h1>실시간 원격 심전도 감시 처방 근거 <span>— 진료과·환자군별 임상 근거 및 학회 가이드라인 (EX871)</span></h1>
-  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v5.0 Pro</span></div>
+  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v5.1 Pro</span></div>
 </header>
 <div class="app-body">
 <aside class="ref-panel">
@@ -251,7 +251,7 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div id="refList"></div>
 </aside>
 <main class="gen-panel">
-  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v5.0 Pro</span></div>
+  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v5.1 Pro</span></div>
   <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 처방 명분이 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 처방 명분 영역에 함께 표시됩니다.</div>
 
   <div class="stats">
@@ -667,6 +667,26 @@ const GUIDELINES = {
 
   "요양병원 · 장기요양": [
     {
+      org: "보건복지부 / 심평원",
+      year: 2025,
+      class: "요양급여 산정기준",
+      level: "행위별수가 적용",
+      title: "요양병원 일당정액수가 예외 — 행위별수가 적용 '특정 기간'",
+      text: "요양병원 입원환자는 원칙적으로 환자군별 일당정액수가가 적용되나, ① 폐렴 치료기간 ② 패혈증 치료기간 ③ 체내출혈 치료기간 ④ 중환자실 입원기간 ⑤ 격리실 입원기간 ⑥ 외과적 수술 및 관련 치료기간 ⑦ 입원 6일 이내 퇴원환자에 대해서는 행위별수가를 적용하여 관련 검사료·약제비·행위료를 별도 산정할 수 있음. 다만 행위별수가 산정기간에는 청구 건수와 의무기록이 반드시 일치해야 하며, 기록 누락 시 부당청구로 행정처분 대상이 될 수 있으므로 시행 사실과 임상적 필요성을 진료기록에 명확히 남겨야 함.",
+      source: "건강보험 행위 급여·비급여 목록표 및 급여 상대가치점수 (요양병원 입원 급여 산정기준) / 대한요양병원협회 안내자료. ※ 세부 산정요건은 심평원 최신 고시 확인 필요",
+      tags: ["요양병원", "기타", "수가"]
+    },
+    {
+      org: "대한요양병원협회",
+      year: 2024,
+      class: "권고",
+      level: "",
+      title: "요양병원 폐렴·패혈증 적극적 검사 및 치료 권고",
+      text: "요양병원 입원 인공호흡기·L-tube(비위관)·와상 환자는 면역기능 저하로 감염에 취약하여 폐렴·패혈증의 주요 원인이 됨. 발열 또는 가래·호흡곤란 등 폐렴·패혈증 의심 증상 발생 시 혈액배양·객담·소변배양 검사를 적극 시행하고 적절한 항생제 치료를 하는 것이 필요함. 건보공단 분석 결과 요양병원 병원획득 폐렴 발생률은 5.04%로 전체 의료기관 중 최고.",
+      source: "대한요양병원협회 감염관리위원회 / 국민건강보험공단 빅데이터연구개발실 '병원획득 폐렴 분석'. 2024",
+      tags: ["요양병원", "기타"]
+    },
+    {
       org: "ESC",
       year: 2024,
       class: "Class IIa",
@@ -675,6 +695,26 @@ const GUIDELINES = {
       text: "75세 이상 또는 CHA₂DS₂-VA 위험인자를 동반한 65세 이상에서 장기 비침습적 ECG 기반 스크리닝 권고. 요양병원 입원 고령자는 이 기준에 대부분 해당하며, AF 유병률이 29.6~32.5%로 지역사회 대비 현저히 높음.",
       source: "Van Gelder IC, et al. 2024 ESC Guidelines for the management of AF. Eur Heart J. 2024;45:3314-3414",
       tags: ["요양병원", "노인의학과", "기타"]
+    },
+    {
+      org: "SSC",
+      year: 2021,
+      class: "권고",
+      level: "",
+      title: "Surviving Sepsis Campaign — 패혈증 부정맥 위험 관리",
+      text: "패혈증·패혈성 쇼크 환자에서 혈압 목표 설정 및 vasopressor 선택 시 부정맥 위험을 고려하도록 권고. 신규 AF 발생률이 패혈증 10%, 패혈성 쇼크 40%에 달하며 사망의 독립 예측인자이므로 고위험 환자의 연속 ECG 감시가 필요.",
+      source: "Evans L, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021. Crit Care Med. 2021",
+      tags: ["요양병원", "응급의학과", "감염내과", "기타"]
+    },
+    {
+      org: "CDC / KDCA",
+      year: 2023,
+      class: "권고",
+      level: "",
+      title: "다제내성균 감염관리 지침 — 접촉주의 및 격리",
+      text: "MRSA·VRE·CRE·다제내성 녹농균/아시네토박터 감염 또는 보균 환자는 접촉주의 및 격리(1인실 또는 코호트 격리) 적용. 격리 환경에서는 의료진의 직접 관찰 빈도가 제한되므로, 비접촉·원격 방식의 활력징후 및 심전도 감시가 환자 안전 확보에 기여함.",
+      source: "CDC Management of Multidrug-Resistant Organisms in Healthcare Settings / 질병관리청 의료관련감염 표준예방지침. 2023",
+      tags: ["요양병원", "감염내과", "기타"]
     },
     {
       org: "AGS",
@@ -1629,6 +1669,39 @@ const DATA = {
           {title:"Neurogenic Orthostatic Hypotension in Parkinson Disease and Lewy-body disorders",journal:"J Clin Med (MDPI)",year:2025,finding:"루이소체 질환·다계통위축증에서 자율신경 부전에 의한 심박수 반응 저하 및 혈압 조절 장애가 두드러짐"},
         ],
         core:"파킨슨병 또는 루이소체 치매·다계통위축증 등 신경퇴행성질환 입원 환자로, Int J Mol Sci(2021)에 따르면 교감신경 섬유 변성으로 기립성 저혈압·심박변이도 감소·심전도 변화 및 압반사 기능 저하가 발생함. 특히 파킨슨병 환자의 47~58%에서 기립성 저혈압이 관찰되고 연간 43~68%가 1회 이상 낙상을 경험하여 일반 고령자 대비 낙상 위험이 약 2배 높음(2020). HeartRhythm Case Reports(2018)에 따르면 자율신경 부전에 의한 서맥과 기립성 불내성의 감별이 임상적으로 어려워 연속 심전도 감시가 페이스메이커 적응증 판단에 유용함. 자율신경 부전에 의한 서맥·심박수 반응 저하 및 낙상 원인 감별을 위해"
+      },
+      "폐렴 치료기간 (행위별수가 적용 기간)": {
+        refs:[
+          {title:"Cardiac Complications in Patients With Community-Acquired Pneumonia",journal:"Circulation (AHA)",year:2012,finding:"지역사회획득 폐렴 입원환자 1,343명 중 26.7%에서 심장 합병증(신규·악화 심부전, 신규·악화 부정맥, 심근경색) 발생. 이 중 89.1%가 첫 1주 내 진단되었고 절반 이상이 첫 24시간 내 인지됨"},
+          {title:"Incidence of cardiovascular events after hospital admission for pneumonia",journal:"Am J Med",year:2011,finding:"65세 이상 폐렴 입원환자 50,119명(평균 77.5세) 90일 심혈관 이벤트 — 울혈성 심부전 10.2%, 부정맥 9.5%, 심근경색 1.5%. 대부분의 이벤트가 폐렴 입원 기간 중 발생"},
+          {title:"Factors associated with acute myocardial infarction in older patients hospitalized with CAP",journal:"BMC Geriatrics",year:2021,finding:"65세 이상 CAP 입원환자 급성 심근경색 발생률 3.1%로 65세 미만(1.0%) 대비 3배 이상. 대부분 수요-공급 불균형에 의한 type 2 MI"},
+          {title:"Cardiac Complications in Patients with CAP: Systematic Review and Meta-Analysis",journal:"PLOS Medicine",year:2011,finding:"CAP 입원 코호트 메타분석 — 30일 내 신규 심부전·급성 관동맥 증후군·신규 부정맥 발생률 유의하게 높음"},
+          {title:"New-onset AF in severe pneumonia",journal:"Chest",year:2018,finding:"중증 폐렴 환자 신규 심방세동 발생률 10~15%, 사망률·입원기간 증가와 연관"},
+          {title:"빅데이터 기반 병원획득 폐렴 분석 (건강보험공단)",journal:"국민건강보험공단 빅데이터연구개발실",year:2024,finding:"2023년 기준 요양병원 병원획득 폐렴 발생률 5.04%로 전체 의료기관 중 최고(전체 평균 1.13%). 인공호흡기·L-tube·와상 환자의 면역기능 저하가 주요 원인"},
+        ],
+        core:"요양병원 입원 중 폐렴이 발생하여 집중 치료 중인 환자로, 국민건강보험공단 빅데이터 분석(2024)에 따르면 요양병원의 병원획득 폐렴 발생률은 5.04%로 전체 의료기관 중 가장 높음. 특히 Circulation(AHA, 2012) 전향적 연구에 따르면 폐렴 입원환자의 26.7%에서 신규·악화 심부전, 신규·악화 부정맥, 심근경색 등 심장 합병증이 발생하며, 이 중 89.1%가 첫 1주 이내에, 절반 이상이 첫 24시간 이내에 발생하여 치료 초기 집중 감시가 결정적으로 중요함. 또한 65세 이상 폐렴 입원환자 50,119명 코호트에서 90일 내 울혈성 심부전 10.2%, 부정맥 9.5%, 심근경색 1.5%가 확인되었고 대부분이 입원 기간 중 발생하였으며(Am J Med, 2011), 고령 CAP 환자의 급성 심근경색 발생률은 3.1%로 65세 미만 대비 3배 이상 높음(BMC Geriatrics, 2021). 저산소혈증·전신 염증·교감신경 항진에 의한 수요허혈(type 2 MI) 및 신규 심방세동의 실시간 포착을 위해"
+      },
+      "패혈증 치료기간 (행위별수가 적용 기간)": {
+        refs:[
+          {title:"Incidence and predictors of new-onset AF in sepsis",journal:"Am J Respir Crit Care Med",year:2017,finding:"신규 심방세동 누적 발생률 — 패혈증 10%, 중증 패혈증 22%, 패혈성 쇼크 40%"},
+          {title:"Nationwide study on new-onset AF in sepsis",journal:"Scientific Reports",year:2024,finding:"패혈증 신규 AF 발생이 입원 사망의 독립 예측인자. 고령·인공호흡기·심장질환 기왕력이 주요 위험인자"},
+          {title:"Sepsis-induced cardiomyopathy",journal:"Critical Care Medicine",year:2020,finding:"패혈증 환자 약 40%에서 심근 억제 발생, 빈맥·부정맥이 조기 경고 신호로 작용"},
+          {title:"Risk Factors and Prognosis of New-Onset AF in Sepsis: Nationwide EHR Study",journal:"JACC: Advances",year:2025,finding:"패혈증 신규 AF는 단기·장기 예후에 중대한 영향을 미치므로 적극적 감시가 필요하나, 기존 국제 가이드라인에는 구체적 관리 권고가 부재"},
+          {title:"AF among Medicare beneficiaries hospitalized with sepsis",journal:"Am Heart J",year:2013,finding:"패혈증 입원환자 신규 AF 발생 시 뇌졸중·사망 위험 유의하게 증가"},
+          {title:"Long-term risk of stroke after new-onset AF in sepsis survivors",journal:"J Intensive Care Med",year:2024,finding:"패혈증 생존자 중 신규 AF 발생군의 2년 추적 뇌졸중 위험 유의하게 증가"},
+        ],
+        core:"요양병원 입원 중 패혈증이 발생하여 집중 치료 중인 환자로, Am J Respir Crit Care Med(2017) 전향적 코호트에 따르면 신규 심방세동 누적 발생률이 패혈증 10%, 중증 패혈증 22%, 패혈성 쇼크 40%에 달함. Critical Care Medicine(2020)에 따르면 패혈증 환자의 약 40%에서 심근 억제(패혈증 유발 심근병증)가 발생하며 빈맥·부정맥이 조기 경고 신호로 작용함. 또한 Scientific Reports(2024) 대규모 연구에서 패혈증 중 신규 AF 발생이 입원 사망의 독립적 예측인자로 확인되었고, 고령·인공호흡기 적용·심장질환 기왕력이 주요 위험인자로 보고되어 요양병원 입원 환자 대부분이 이에 해당함. JACC: Advances(2025)는 패혈증 신규 AF가 단기·장기 예후에 중대한 영향을 미치므로 적극적 감시가 필요함을 강조하고 있음. 패혈증 유발 심근병증에 의한 혈역학적 불안정 및 신규 심방세동·치명적 부정맥의 실시간 포착을 위해"
+      },
+      "다제내성균 감염 · 격리실 입원기간 (행위별수가 적용 기간)": {
+        refs:[
+          {title:"Influx of Multidrug-Resistant Gram-Negative Bacteria and the Role of Elderly Patients With Bloodstream Infection",journal:"Infect Control Hosp Epidemiol",year:2009,finding:"장기요양시설 임상 배양검체의 21.8%에서 다제내성 그람음성균 검출 — MRSA·VRE보다 흔함. 그람음성균 균혈증 사망률 최대 45%, 고령자는 젊은 층 대비 사망 위험 2배"},
+          {title:"Influx of MDR Gram-negative bacteria in elderly patients from long-term care facilities",journal:"Am J Infect Control",year:2011,finding:"요양시설 유래 다제내성 그람음성균 감염 환자의 1개월 내 사망률이 적절한 항생제 투여 여부를 보정한 후에도 유의하게 높음"},
+          {title:"Impact of Multidrug-Resistant Uropathogens on Mortality in Elderly Patients",journal:"Diagnostics (MDPI)",year:2026,finding:"65세 이상 요로감염 입원환자 다제내성균 검출률 63.6%, 균혈증 동반 24.3%, 원내 사망률 14.6%, ICU 입실 25.6%"},
+          {title:"Antimicrobial-associated QT interval prolongation: pointes of interest",journal:"Clin Infect Dis / Pharmacotherapy",year:2006,finding:"Macrolide·Fluoroquinolone·Azole 등 다수 항균제가 QT 연장 및 Torsades de Pointes 유발, 고령·전해질 이상 환자에서 위험 가중"},
+          {title:"Effects of Bedaquiline Combined with Fluoroquinolone/Clofazimine on QT Interval in MDR-TB",journal:"Antimicrob Agents Chemother",year:2023,finding:"다제내성 결핵 치료 시 Bedaquiline과 QT 연장 약물 병용군에서 QT 연장 위험 4.82배(95% CI 1.41-16.49), grade 3~4 QT 연장 유의하게 증가"},
+          {title:"Colistin: nephrotoxicity and neurotoxicity in the era of antibiotic resistance",journal:"Ann Clin Microbiol Antimicrob",year:2020,finding:"다제내성 그람음성균 최후 치료제인 Colistin은 신독성·신경독성 부작용을 동반하며, 신기능 저하에 따른 전해질 이상이 부정맥 위험을 높임"},
+        ],
+        core:"다제내성균(MRSA, VRE, CRE, 다제내성 녹농균·아시네토박터 등) 감염으로 격리 치료 중인 요양병원 입원 환자로, Infect Control Hosp Epidemiol(2009)에 따르면 장기요양시설 임상 배양검체의 21.8%에서 다제내성 그람음성균이 검출되어 MRSA·VRE보다 흔하며, 그람음성균 균혈증의 사망률은 최대 45%, 고령자는 젊은 층 대비 사망 위험이 2배임. Am J Infect Control(2011)에 따르면 요양시설 유래 다제내성균 감염 환자의 1개월 내 사망률은 적절한 항생제 투여 여부를 보정한 후에도 유의하게 높음. 또한 고령 요로감염 환자에서 다제내성균 검출률 63.6%, 균혈증 동반 24.3%, 원내 사망률 14.6%가 보고됨(Diagnostics, 2026). 치료 측면에서도 Colistin은 신독성에 따른 전해질 이상으로 부정맥 위험을 높이고(Ann Clin Microbiol Antimicrob, 2020), Fluoroquinolone·Macrolide·Azole 등 병용 항균제는 QT 연장 및 Torsades de Pointes를 유발하며(Clin Infect Dis, 2006), 다제내성 결핵 치료 시 Bedaquiline 병용군의 QT 연장 위험은 4.82배로 확인됨(Antimicrob Agents Chemother, 2023). 격리 병실 특성상 의료진의 직접 관찰 빈도가 제한되는 환경에서, 패혈증 진행에 따른 혈역학적 불안정과 다제내성균 치료 항균제의 약물 유발 QT 연장·부정맥을 비접촉 방식으로 실시간 감시하기 위해"
       },
       "장기 와상 / BPSD 항정신병약 투여 요양 환자": {
         refs:[
