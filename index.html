@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>심전도 감시 차팅 예시 v3.0</title>
+<title>실시간 원격 심전도 감시 처방 근거 v5.0</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
@@ -231,7 +231,7 @@ table.ft tr:hover td{background:#F0FDFA;}
   </div>
 </div>
 <header class="app-header">
-  <h1>심전도 감시 차팅 예시 <span>— 실시간 원격 심전도 감시 처방 근거 (EX871)</span></h1>
+  <h1>실시간 원격 심전도 감시 처방 근거 <span>— 진료과·환자군별 임상 근거 및 학회 가이드라인 (EX871)</span></h1>
   <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v5.0 Pro</span></div>
 </header>
 <div class="app-body">
@@ -251,8 +251,8 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div id="refList"></div>
 </aside>
 <main class="gen-panel">
-  <div class="gen-title">자동 차팅 멘트 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v5.0 Pro</span></div>
-  <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 차팅 멘트가 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 차팅 예시 영역에 함께 표시됩니다.</div>
+  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v5.0 Pro</span></div>
+  <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 처방 명분이 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 처방 명분 영역에 함께 표시됩니다.</div>
 
   <div class="stats">
     <div class="si">진료과 <strong id="s1">0</strong></div>
@@ -273,8 +273,8 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div class="step"><div class="step-l"><span class="sn">4</span> 동반 위험요소 (복수 선택)</div><div class="risk-grid" id="rG"></div></div>
 
   <div class="result-area empty" id="rA">
-    <div class="result-lbl">차팅 예시</div>
-    <div id="rC"><div class="result-placeholder">항목을 선택하면 차팅 멘트가 자동 생성됩니다.</div></div>
+    <div class="result-lbl">처방 명분</div>
+    <div id="rC"><div class="result-placeholder">항목을 선택하면 처방 명분이 자동 생성됩니다.</div></div>
   </div>
   <div class="action-bar">
     <button class="ab ab-pdf" onclick="window.print()">📄 PDF 추출</button>
@@ -1930,7 +1930,7 @@ function generate(){
   const area=document.getElementById('rA'), content=document.getElementById('rC');
   if(!selDept||!selGroup){
     area.classList.add('empty');
-    content.innerHTML='<div class="result-placeholder">진료과·환자군·증상을 선택하면 차팅 멘트가 자동 생성됩니다.</div>';
+    content.innerHTML='<div class="result-placeholder">진료과·환자군·증상을 선택하면 처방 명분이 자동 생성됩니다.</div>';
     return;
   }
   area.classList.remove('empty');
@@ -2071,7 +2071,7 @@ function generate(){
         <div class="gl-i-src">📖 ${g.source}</div>
       </div>`;
     });
-    glBox += `<div class="result-gl-note">※ 위 가이드라인 권고사항은 차팅 멘트에는 포함되지 않으나, 처방 정당성·보험심사·세일즈 미팅 시 근거 자료로 활용하실 수 있습니다.</div></div>`;
+    glBox += `<div class="result-gl-note">※ 위 가이드라인 권고사항은 처방 명분 본문에는 포함되지 않으나, 처방 정당성·보험심사·세일즈 미팅 시 근거 자료로 활용하실 수 있습니다.</div></div>`;
   }
 
   content.innerHTML=`<div class="result-text">${finalText}</div><button class="copy-inline" onclick="copyR(this)"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>텍스트 복사</button>${refHtml}${specBox}${glBox}`;
@@ -2109,7 +2109,7 @@ function resetAll(){
   renderCatFilter();
   document.getElementById('gG').innerHTML='<span style="font-size:11.5px;color:var(--text-muted)">먼저 진료과를 선택해 주세요.</span>';
   document.getElementById('rA').classList.add('empty');
-  document.getElementById('rC').innerHTML='<div class="result-placeholder">항목을 선택하면 차팅 멘트가 자동 생성됩니다.</div>';
+  document.getElementById('rC').innerHTML='<div class="result-placeholder">항목을 선택하면 처방 명분이 자동 생성됩니다.</div>';
   document.getElementById('refSearch').value='';
   filterRefs('');
 }
