@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 원격 심전도 감시 처방 근거 v6.1</title>
+<title>실시간 원격 심전도 감시 처방 근거 v6.2</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
@@ -195,6 +195,42 @@ table.ft td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-alig
 table.ft tr:nth-child(even) td{background:#F8FAFC;}
 table.ft tr:hover td{background:#F0FDFA;}
 
+/* ── Admin stats dashboard ── */
+.adm-overlay{position:fixed;inset:0;background:rgba(8,20,36,.75);backdrop-filter:blur(4px);z-index:9500;display:none;overflow-y:auto;padding:34px 16px 60px;}
+.adm-overlay.show{display:block;}
+.adm-card{max-width:860px;margin:0 auto;background:#fff;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.35);overflow:hidden;}
+.adm-hdr{background:linear-gradient(135deg,#0F2440 0%,#1B3A5C 100%);color:#fff;padding:18px 24px;display:flex;align-items:center;gap:10px;}
+.adm-hdr .adm-t{font-size:15px;font-weight:800;letter-spacing:.3px;}
+.adm-hdr .adm-badge{background:rgba(255,255,255,.16);padding:3px 10px;border-radius:5px;font-size:10.5px;font-weight:700;}
+.adm-x{margin-left:auto;background:rgba(255,255,255,.15);border:none;color:#fff;padding:7px 14px;border-radius:6px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;}
+.adm-x:hover{background:rgba(255,255,255,.3);}
+.adm-body{padding:22px 24px 26px;}
+.adm-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:11px;margin-bottom:22px;}
+.adm-kpi{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.adm-kpi .k-l{font-size:10.5px;color:var(--text-muted);font-weight:700;margin-bottom:5px;}
+.adm-kpi .k-v{font-size:25px;font-weight:900;color:var(--navy);line-height:1.1;}
+.adm-kpi .k-u{font-size:11px;font-weight:700;color:var(--text-muted);margin-left:2px;}
+.adm-kpi.hi{background:linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%);border-color:#6EE7B7;}
+.adm-kpi.hi .k-v{color:var(--teal-dark);}
+.adm-sec{font-size:12px;font-weight:800;color:var(--navy);margin:20px 0 9px;padding-left:9px;border-left:4px solid var(--teal);}
+.adm-bars{display:flex;align-items:flex-end;gap:3px;height:96px;padding:8px 4px 0;background:var(--bg);border:1px solid var(--border);border-radius:9px;}
+.adm-bar{flex:1;min-width:5px;background:linear-gradient(180deg,var(--teal) 0%,var(--teal-dark) 100%);border-radius:3px 3px 0 0;position:relative;transition:opacity .15s;min-height:3px;}
+.adm-bar:hover{opacity:.75;}
+.adm-bar span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s;margin-bottom:3px;}
+.adm-bar:hover span{opacity:1;}
+.adm-tbl{width:100%;border-collapse:collapse;font-size:11.5px;}
+.adm-tbl th{background:var(--navy);color:#fff;padding:8px 11px;text-align:left;font-weight:700;font-size:10.5px;position:sticky;top:0;}
+.adm-tbl td{padding:7px 11px;border-bottom:1px solid var(--border);color:var(--text);}
+.adm-tbl tr:nth-child(even) td{background:var(--bg);}
+.adm-tbl .num{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--teal-dark);}
+.adm-scroll{max-height:290px;overflow-y:auto;border:1px solid var(--border);border-radius:9px;}
+.adm-note{margin-top:16px;padding:10px 13px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:7px;font-size:10.5px;line-height:1.65;color:#1E40AF;}
+.adm-msg{padding:34px 10px;text-align:center;color:var(--text-muted);font-size:12.5px;}
+@media(max-width:900px){
+  .adm-overlay{padding:16px 10px 40px;}
+  .adm-body{padding:16px 14px 20px;}
+  .adm-kpi .k-v{font-size:21px;}
+}
 /* ── Step completion chips ── */
 .step-chip{margin-left:8px;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 9px;border-radius:10px;font-weight:700;letter-spacing:0;text-transform:none;}
 .step-chip:empty{display:none;}
@@ -311,7 +347,7 @@ table.ft tr:hover td{background:#F0FDFA;}
 </div>
 <header class="app-header">
   <h1>실시간 원격 심전도 감시 처방 근거 <span>— 진료과·환자군별 임상 근거 및 학회 가이드라인 (EX871)</span></h1>
-  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v6.1 Pro</span></div>
+  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v6.2 Pro</span></div>
 </header>
 <div class="app-body">
 <aside class="ref-panel">
@@ -330,7 +366,7 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div id="refList"></div>
 </aside>
 <main class="gen-panel">
-  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v6.1 Pro</span></div>
+  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v6.2 Pro</span></div>
   <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 처방 명분이 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 처방 명분 영역에 함께 표시됩니다.</div>
 
   <div class="stats">
@@ -393,6 +429,17 @@ table.ft tr:hover td{background:#F0FDFA;}
     </div>
   </div>
 </div>
+<div class="adm-overlay" id="admOverlay">
+  <div class="adm-card">
+    <div class="adm-hdr">
+      <span style="font-size:17px">📊</span>
+      <span class="adm-t">접속 로그 통계</span>
+      <span class="adm-badge">관리자</span>
+      <button class="adm-x" onclick="closeAdmin()">✕ 닫기</button>
+    </div>
+    <div class="adm-body" id="admBody"></div>
+  </div>
+</div>
 <button class="ref-fab" onclick="toggleRefDrawer()">📚 근거 논문</button>
 <div class="ref-scrim" id="refScrim" onclick="toggleRefDrawer()"></div>
 <div class="pres-overlay" id="presOverlay">
@@ -433,6 +480,34 @@ const VALID_CODES = new Set([
   "MKT2026"
 ]);
 
+// ── 접속 로그 백엔드 (Supabase) ──
+const SB_URL  = 'https://kcelymlhturzsiwriviq.supabase.co';
+const SB_KEY  = 'sb_publishable_8aJ9fKOh8CcNSFanTEjNfA__auB9mgo';
+const TOOL_ID = 'ecg-rx-rationale';
+const ADMIN_CODE = 'MKTMKT';
+
+function sbHeaders(){
+  return { 'Content-Type':'application/json', 'apikey':SB_KEY, 'Authorization':'Bearer '+SB_KEY };
+}
+
+// 로그인 1건 기록 (실패해도 도구 사용에는 영향 없음)
+function logAccess(code, isAdmin){
+  try{
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    fetch(SB_URL + '/rest/v1/tool_access_logs', {
+      method:'POST',
+      headers: Object.assign(sbHeaders(), {'Prefer':'return=minimal'}),
+      body: JSON.stringify({
+        tool: TOOL_ID,
+        access_code: code,
+        is_admin: !!isAdmin,
+        device: isMobile ? 'mobile' : 'desktop',
+        user_agent: (navigator.userAgent||'').slice(0,300)
+      })
+    }).catch(function(){});
+  }catch(e){}
+}
+
 if(sessionStorage.getItem('chartingAuth')==='ok'){
   document.body.classList.remove('app-locked');
   document.getElementById('loginOverlay').classList.add('hidden');
@@ -443,7 +518,21 @@ function doLogin(){
   const err = document.getElementById('errMsg');
   const code = input.value.trim();
   if(!code){ err.textContent='코드를 입력해 주세요.'; input.focus(); return; }
+
+  // 숨겨진 관리자 코드 — 통계 대시보드
+  if(code === ADMIN_CODE){
+    logAccess(code, true);
+    sessionStorage.setItem('chartingAuth','ok');
+    sessionStorage.setItem('chartingAdmin','ok');
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.body.classList.remove('app-locked');
+    input.value='';
+    openAdmin();
+    return;
+  }
+
   if(VALID_CODES.has(code)){
+    logAccess(code, false);
     sessionStorage.setItem('chartingAuth','ok');
     document.getElementById('loginOverlay').classList.add('hidden');
     document.body.classList.remove('app-locked');
@@ -454,6 +543,106 @@ function doLogin(){
     setTimeout(()=>{ input.style.borderColor=''; },1500);
   }
 }
+
+// ════════════════════════════════════════════
+// ADMIN — 접속 로그 통계 대시보드
+// ════════════════════════════════════════════
+function openAdmin(){
+  const ov = document.getElementById('admOverlay');
+  const body = document.getElementById('admBody');
+  body.innerHTML = '<div class="adm-msg">통계를 불러오는 중…</div>';
+  ov.classList.add('show');
+  document.body.style.overflow='hidden';
+
+  fetch(SB_URL + '/rest/v1/rpc/get_tool_access_stats', {
+    method:'POST', headers: sbHeaders(), body: JSON.stringify({p_key: ADMIN_CODE, p_tool: TOOL_ID})
+  })
+  .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(function(d){ renderAdmin(d); })
+  .catch(function(e){
+    body.innerHTML = '<div class="adm-msg">통계를 불러오지 못했습니다.<br><span style="font-size:11px;opacity:.7">'+(e.message||e)+'</span></div>';
+  });
+}
+
+function closeAdmin(){
+  document.getElementById('admOverlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function fmtDT(iso){
+  if(!iso) return '—';
+  try{
+    const d = new Date(iso);
+    return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0')
+      +' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  }catch(e){ return iso; }
+}
+
+function renderAdmin(d){
+  const body = document.getElementById('admBody');
+  if(!d || typeof d.total === 'undefined'){
+    body.innerHTML = '<div class="adm-msg">데이터 형식을 확인할 수 없습니다.</div>'; return;
+  }
+  if(d.total === 0){
+    body.innerHTML = '<div class="adm-msg">아직 기록된 접속이 없습니다.<br><span style="font-size:11px;opacity:.7">로그인이 발생하면 이곳에 집계됩니다.</span></div>'
+      + '<div class="adm-note">📌 로그는 이 기능이 배포된 시점부터 쌓입니다. 이전 접속 이력은 기록되지 않았습니다.</div>';
+    return;
+  }
+
+  let h = '<div class="adm-kpis">'
+    + '<div class="adm-kpi hi"><div class="k-l">총 로그인</div><div class="k-v">'+d.total+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">접속 코드 수</div><div class="k-v">'+d.unique_codes+'<span class="k-u">개</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">오늘</div><div class="k-v">'+d.today+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">최근 7일</div><div class="k-v">'+d.last7+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">최근 30일</div><div class="k-v">'+d.last30+'<span class="k-u">회</span></div></div>'
+    + '</div>';
+
+  const days = d.by_day || [];
+  if(days.length){
+    const mx = Math.max.apply(null, days.map(function(x){ return x.c; }));
+    h += '<div class="adm-sec">📈 일자별 로그인 (최근 30일)</div><div class="adm-bars">';
+    days.forEach(function(x){
+      const pct = Math.max(3, Math.round(x.c / mx * 100));
+      h += '<div class="adm-bar" style="height:'+pct+'%"><span>'+x.d.slice(5)+' · '+x.c+'회</span></div>';
+    });
+    h += '</div>';
+  }
+
+  const codes = d.by_code || [];
+  if(codes.length){
+    h += '<div class="adm-sec">🏥 코드별 로그인 (상위 '+codes.length+'개)</div><div class="adm-scroll"><table class="adm-tbl">'
+      + '<thead><tr><th style="width:44px">#</th><th>접속 코드</th><th style="width:88px;text-align:right">횟수</th><th style="width:132px">최근 접속</th></tr></thead><tbody>';
+    codes.forEach(function(x,i){
+      h += '<tr><td>'+(i+1)+'</td><td style="font-family:\'JetBrains Mono\',monospace;font-weight:600">'+(x.code||'(없음)')+'</td>'
+        + '<td class="num">'+x.cnt+'</td><td style="font-size:10.5px;color:var(--text-muted)">'+fmtDT(x.last_at)+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+  }
+
+  const dev = d.by_device || {};
+  const devKeys = Object.keys(dev);
+  if(devKeys.length){
+    h += '<div class="adm-sec">💻 접속 기기</div><div style="display:flex;gap:9px;flex-wrap:wrap">';
+    devKeys.forEach(function(k){
+      const label = k==='mobile' ? '📱 모바일' : (k==='desktop' ? '🖥️ 데스크톱' : '❓ '+k);
+      h += '<div class="adm-kpi" style="flex:1;min-width:118px"><div class="k-l">'+label+'</div><div class="k-v">'+dev[k]+'<span class="k-u">회</span></div></div>';
+    });
+    h += '</div>';
+  }
+
+  h += '<div class="adm-note">📌 집계 기간: '+fmtDT(d.first_at)+' ~ '+fmtDT(d.last_at)+'<br>'
+    + '· 관리자 코드(MKTMKT) 접속은 집계에서 제외됩니다.<br>'
+    + '· IP 주소는 저장하지 않으며, 로그인 시점·코드·기기 종류만 기록됩니다.</div>';
+
+  body.innerHTML = h;
+}
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    const a = document.getElementById('admOverlay');
+    if(a && a.classList.contains('show')) closeAdmin();
+  }
+});
 
 // ════════════════════════════════════════════
 // GUIDELINES — 학회 가이드라인 권고사항 (Always Visible)
@@ -2195,6 +2384,13 @@ function filterRefs(q){
 let _qsMatches = [];
 function quickSearch(q){
   const drop = document.getElementById('qsDrop');
+  // 숨겨진 관리자 트리거 — 로그인 후에도 통계 확인 가능
+  if((q||'').trim().toUpperCase() === ADMIN_CODE){
+    document.getElementById('qsInput').value='';
+    drop.classList.remove('show');
+    openAdmin();
+    return;
+  }
   q = (q||'').trim().toLowerCase();
   if(!q){ drop.classList.remove('show'); drop.innerHTML=''; _qsMatches=[]; return; }
   _qsMatches = [];
