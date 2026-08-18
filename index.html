@@ -300,6 +300,17 @@ table.ft tr:hover td{background:#F0FDFA;}
 .pres-gl{display:flex;flex-wrap:wrap;gap:8px;}
 .pres-pill{background:var(--teal-light);border:1px solid #5EEAD4;color:var(--teal-dark);padding:7px 15px;border-radius:18px;font-size:12.5px;font-weight:700;}
 .pres-foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);line-height:1.7;}
+/* 가이드라인 요약 카드 (발표 화면 + PDF 공통) */
+.pres-gl-full{display:block;}
+.pres-glc{background:#F8FAFC;border:1px solid #BFDBFE;border-left:5px solid #1E40AF;border-radius:9px;padding:14px 17px;margin-bottom:10px;}
+.pres-glc-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:7px;}
+.pres-glc-org{background:#1E40AF;color:#fff;padding:3px 10px;border-radius:5px;font-size:12px;font-weight:800;letter-spacing:.3px;}
+.pres-glc-yr{background:#DBEAFE;color:#1E40AF;padding:3px 9px;border-radius:5px;font-size:11.5px;font-weight:700;}
+.pres-glc-cls{background:#FEF3C7;color:#92400E;padding:3px 9px;border-radius:5px;font-size:11.5px;font-weight:700;}
+.pres-glc-lvl{background:#FFE4E6;color:#9F1239;padding:3px 9px;border-radius:5px;font-size:11.5px;font-weight:700;}
+.pres-glc-t{font-size:14px;font-weight:800;color:#1E3A8A;margin-bottom:5px;line-height:1.45;}
+.pres-glc-x{font-size:13.5px;color:#1F2937;line-height:1.75;}
+.pres-glc-s{margin-top:7px;padding-top:6px;border-top:1px dashed #BFDBFE;font-size:10.5px;color:#64748B;font-style:italic;line-height:1.5;}
 /* ── Print leaflet (A4 one-pager) ── */
 #printSheet{display:none;}
 .ps-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid #0F2440;padding-bottom:8px;margin-bottom:12px;}
@@ -311,9 +322,10 @@ table.ft tr:hover td{background:#F0FDFA;}
 .ps-refs{font-size:8.5pt;line-height:1.6;color:#222;padding-left:16px;margin:4px 0;}
 .ps-refs li{margin-bottom:3px;}
 .ps-gl{font-size:8.5pt;line-height:1.6;color:#222;padding-left:16px;margin:4px 0;list-style:disc;}
+.ps-gl li{margin-bottom:6px;page-break-inside:avoid;}
 .ps-foot{margin-top:14px;padding-top:8px;border-top:1px solid #999;font-size:7.5pt;color:#666;}
-@page{margin:13mm;}
-@page presPage{size:A4 landscape;margin:11mm;}
+@page{margin:0;}
+@page presPage{size:A4 landscape;margin:0;}
 @media print{
   html,body{background:#fff !important;}
   *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
@@ -324,8 +336,12 @@ table.ft tr:hover td{background:#F0FDFA;}
   /* 발표 모드 PDF */
   body.print-pres *{visibility:hidden;}
   body.print-pres .pres-overlay,body.print-pres .pres-overlay *{visibility:visible;}
-  body.print-pres .pres-overlay{page:presPage;display:block !important;position:absolute;top:0;left:0;right:auto;bottom:auto;width:100%;height:auto;overflow:visible;padding:0;background:#fff !important;}
-  body.print-pres .pres-inner{max-width:none;}
+  body.print-pres .pres-overlay{page:presPage;display:block !important;position:absolute;top:0;left:0;right:auto;bottom:auto;width:100%;height:auto;overflow:visible;padding:9mm 10mm;background:#fff !important;}
+  body.print-pres .pres-inner{max-width:none;width:100%;zoom:var(--pres-zoom,1);}
+  body.print-pres .pres-gl-full{column-count:2;column-gap:9px;}
+  body.print-pres .pres-glc{break-inside:avoid;}
+  /* 리플렛도 자체 여백 사용 */
+  body:not(.print-pres) #printSheet{padding:13mm;}
   body.print-pres .pres-tools{display:none !important;}
   body.print-pres .pres-title{font-size:25pt;}
   body.print-pres .pres-eyebrow{font-size:10pt;}
@@ -335,7 +351,14 @@ table.ft tr:hover td{background:#F0FDFA;}
   body.print-pres .pres-card{page-break-inside:avoid;box-shadow:none;}
   body.print-pres .pres-card-j{font-size:9pt;}
   body.print-pres .pres-card-f{font-size:10.5pt;}
-  body.print-pres .pres-pill{font-size:9.5pt;background:#CCFBF1 !important;}
+  body.print-pres .pres-gl{display:none !important;}
+  body.print-pres .pres-gl-full{display:block !important;}
+  body.print-pres .pres-glc{page-break-inside:avoid;background:#F8FAFC !important;padding:9px 12px;margin-bottom:7px;}
+  body.print-pres .pres-glc-org{font-size:9pt;}
+  body.print-pres .pres-glc-yr,body.print-pres .pres-glc-cls,body.print-pres .pres-glc-lvl{font-size:8.5pt;}
+  body.print-pres .pres-glc-t{font-size:10pt;}
+  body.print-pres .pres-glc-x{font-size:9.5pt;line-height:1.6;}
+  body.print-pres .pres-glc-s{font-size:7.5pt;}
   body.print-pres .pres-foot{font-size:8pt;}
 }
 /* ── Mobile drawer & touch optimization ── */
@@ -3002,11 +3025,24 @@ function openPresent(){
   });
   h += `</div>`;
   if(gl.length){
-    h += `<div class="pres-sec">🏛️ 학회 가이드라인</div><div class="pres-gl">`;
-    gl.slice(0,6).forEach(g=>{ h += `<span class="pres-pill">${g.org} ${g.year}${g.class ? ' · ' + g.class : ''}</span>`; });
+    h += `<div class="pres-sec">🏛️ 학회 가이드라인 <span style="font-weight:700;color:var(--text-muted);font-size:12px">${gl.length}건</span></div>`;
+    h += `<div class="pres-gl-full">`;
+    gl.forEach(g=>{
+      h += `<div class="pres-glc">
+        <div class="pres-glc-top">
+          <span class="pres-glc-org">${g.org}</span>
+          <span class="pres-glc-yr">${g.year}</span>
+          ${g.class ? `<span class="pres-glc-cls">${g.class}</span>` : ''}
+          ${g.level ? `<span class="pres-glc-lvl">${g.level}</span>` : ''}
+        </div>
+        <div class="pres-glc-t">${g.title}</div>
+        <div class="pres-glc-x">${g.text}</div>
+        <div class="pres-glc-s">📖 ${g.source}</div>
+      </div>`;
+    });
     h += `</div>`;
   }
-  h += `<div class="pres-foot">본 자료는 의료진의 임상적 판단을 돕기 위한 근거 정리 자료입니다. 처방 여부의 최종 판단은 담당 의료진에게 있습니다.<br>출력일 ${new Date().toLocaleDateString('ko-KR')} · EX871 처방 근거 도구</div>`;
+  h += `<div class="pres-foot">본 자료는 의료진의 임상적 판단을 돕기 위한 근거 정리 자료입니다. 처방 여부의 최종 판단은 담당 의료진에게 있습니다.</div>`;
   document.getElementById('presInner').innerHTML = h;
   document.getElementById('presOverlay').classList.add('show');
   document.body.style.overflow='hidden';
@@ -3016,14 +3052,57 @@ function closePresent(){
   document.body.style.overflow='';
 }
 
+// A4 가로 1장에 들어가도록 배율을 계산 (96dpi 기준 297×210mm)
+function fitPresToOnePage(){
+  const ov=document.getElementById('presOverlay');
+  const inner=document.getElementById('presInner');
+  if(!ov||!inner) return 1;
+  const PAGE_W=1122, PAGE_H=793, PAD_X=38, PAD_Y=34;   // px (여백 10mm / 9mm)
+  const availW=PAGE_W-PAD_X*2, availH=PAGE_H-PAD_Y*2;
+
+  // 화면 스타일 백업 후 인쇄 크기로 임시 렌더링
+  const bk={pos:ov.style.position,left:ov.style.left,top:ov.style.top,w:ov.style.width,
+            pad:ov.style.padding,ovf:ov.style.overflow,iw:inner.style.width,
+            imw:inner.style.maxWidth,iz:inner.style.zoom,cc:inner.style.columnCount};
+  ov.style.position='fixed'; ov.style.left='-20000px'; ov.style.top='0';
+  ov.style.width=PAGE_W+'px'; ov.style.padding=PAD_Y+'px '+PAD_X+'px'; ov.style.overflow='visible';
+  inner.style.width=availW+'px'; inner.style.maxWidth='none';
+
+  // 인쇄 시 가이드라인 2단 배치를 측정에도 반영
+  const glf=inner.querySelector('.pres-gl-full');
+  const glbk = glf ? {cc:glf.style.columnCount,cg:glf.style.columnGap} : null;
+  if(glf){ glf.style.columnCount='2'; glf.style.columnGap='9px'; }
+
+  let z=1;
+  for(let i=0;i<15;i++){
+    inner.style.zoom=z;
+    const h=inner.getBoundingClientRect().height;
+    if(h<=availH || z<=0.42) break;
+    z=Math.round((z-0.05)*100)/100;
+  }
+
+  // 원복
+  if(glf&&glbk){ glf.style.columnCount=glbk.cc; glf.style.columnGap=glbk.cg; }
+  ov.style.position=bk.pos; ov.style.left=bk.left; ov.style.top=bk.top; ov.style.width=bk.w;
+  ov.style.padding=bk.pad; ov.style.overflow=bk.ovf;
+  inner.style.width=bk.iw; inner.style.maxWidth=bk.imw; inner.style.zoom=bk.iz;
+  document.documentElement.style.setProperty('--pres-zoom', z);
+  return z;
+}
+
 // 발표 화면을 벡터 PDF로 출력 (인쇄 대화상자 → "PDF로 저장")
 function printPresent(){
   const ov=document.getElementById('presOverlay');
   if(!ov || !ov.classList.contains('show')) return;
+  fitPresToOnePage();
   document.body.classList.add('print-pres');
-  const done=function(){ document.body.classList.remove('print-pres'); window.removeEventListener('afterprint',done); };
+  const done=function(){
+    document.body.classList.remove('print-pres');
+    document.documentElement.style.removeProperty('--pres-zoom');
+    window.removeEventListener('afterprint',done);
+  };
   window.addEventListener('afterprint',done);
-  setTimeout(function(){ window.print(); setTimeout(done,1200); },60);
+  setTimeout(function(){ window.print(); setTimeout(done,1200); },80);
 }
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){
@@ -3047,7 +3126,11 @@ function buildPrintSheet(){
   h += `</ol>`;
   if(gl.length){
     h += `<div class="ps-sec">관련 학회 가이드라인</div><ul class="ps-gl">`;
-    gl.slice(0,5).forEach(g=>{ h += `<li><strong>${g.org} ${g.year}${g.class ? ' (' + g.class + ')' : ''}</strong> — ${g.title}</li>`; });
+    gl.forEach(g=>{
+      h += `<li><strong>${g.org} ${g.year}${g.class ? ' (' + g.class + (g.level ? ', ' + g.level : '') + ')' : ''}</strong> — ${g.title}<br>`
+        + `<span style="color:#333">${g.text}</span><br>`
+        + `<span style="color:#666;font-style:italic;font-size:7.5pt">${g.source}</span></li>`;
+    });
     h += `</ul>`;
   }
   h += `<div class="ps-foot">본 자료는 의료진 참고용이며, 처방 및 청구의 최종 판단은 담당 의료진과 각 기관의 심사 기준을 따릅니다.</div>`;
