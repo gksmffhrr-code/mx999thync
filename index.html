@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>실시간 원격 심전도 감시 처방 근거 v6.2</title>
+<title>실시간 원격 심전도 감시 처방 근거 v7.1</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 :root {
@@ -195,6 +195,37 @@ table.ft td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-alig
 table.ft tr:nth-child(even) td{background:#F8FAFC;}
 table.ft tr:hover td{background:#F0FDFA;}
 
+/* ── Reference review workbench ── */
+.rv-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.rv-tab{padding:7px 14px;border:1.5px solid var(--border);border-radius:7px;background:#fff;font-family:inherit;font-size:11.5px;font-weight:700;color:var(--text-mid);cursor:pointer;}
+.rv-tab.on{background:var(--navy);border-color:var(--navy);color:#fff;}
+.rv-tab .n{opacity:.75;margin-left:4px;font-size:10.5px;}
+.rv-prog{height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:14px;}
+.rv-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--teal) 0%,var(--teal-dark) 100%);transition:width .3s;}
+.rv-item{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;background:#fff;}
+.rv-item.approved{border-color:#6EE7B7;background:#F0FDF9;}
+.rv-item.rejected{border-color:#FCA5A5;background:#FEF2F2;opacity:.75;}
+.rv-loc{font-size:10.5px;font-weight:800;color:var(--teal-dark);margin-bottom:5px;}
+.rv-loc .sep{color:var(--text-muted);margin:0 5px;}
+.rv-t{font-size:12.5px;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:4px;}
+.rv-j{font-size:10.5px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:7px;}
+.rv-f{font-size:11.5px;line-height:1.65;color:var(--text-mid);background:var(--bg);border-radius:6px;padding:9px 11px;margin-bottom:9px;}
+.rv-acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
+.rv-b{padding:7px 13px;border:1.5px solid var(--border);border-radius:6px;background:#fff;font-family:inherit;font-size:11px;font-weight:700;cursor:pointer;color:var(--text-mid);}
+.rv-b.ok{border-color:var(--teal);color:var(--teal-dark);}
+.rv-b.ok:hover,.rv-b.ok.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.rv-b.no{border-color:#DC2626;color:#DC2626;}
+.rv-b.no:hover,.rv-b.no.on{background:#DC2626;color:#fff;}
+.rv-b.lnk{border-color:#CBD5E1;color:var(--text-muted);text-decoration:none;display:inline-flex;align-items:center;}
+.rv-b.lnk:hover{border-color:var(--navy);color:var(--navy);}
+.rv-st{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:5px;}
+.rv-st.pending{background:#FEF3C7;color:#92400E;}
+.rv-st.approved{background:#D1FAE5;color:#065F46;}
+.rv-st.rejected{background:#FEE2E2;color:#991B1B;}
+.rv-empty{padding:34px 10px;text-align:center;color:var(--text-muted);font-size:12.5px;}
+.rv-note{margin-bottom:14px;padding:10px 13px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:7px;font-size:10.5px;line-height:1.65;color:#1E40AF;}
+.rv-filter{margin-bottom:12px;}
+.rv-filter select{padding:7px 11px;border:1.5px solid var(--border);border-radius:7px;font-family:inherit;font-size:11.5px;background:#fff;}
 /* ── Admin stats dashboard ── */
 .adm-overlay{position:fixed;inset:0;background:rgba(8,20,36,.75);backdrop-filter:blur(4px);z-index:9500;display:none;overflow-y:auto;padding:34px 16px 60px;}
 .adm-overlay.show{display:block;}
@@ -245,24 +276,30 @@ table.ft tr:hover td{background:#F0FDFA;}
 .fav-inline{display:inline-flex;align-items:center;gap:4px;margin-top:12px;margin-left:8px;padding:7px 14px;border:1.5px solid #FCD34D;border-radius:6px;background:#FFFBEB;color:#92400E;font-family:inherit;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .15s;}
 .fav-inline:hover{background:#FDE68A;}
 .fav-inline.on{background:var(--amber);border-color:var(--amber);color:#fff;}
-/* ── Presentation mode ── */
+/* ── Presentation mode (white theme) ── */
 .ab-pres{background:#1E40AF;color:#fff;}
 .ab-pres:hover{background:#1E3A8A;}
-.pres-overlay{position:fixed;inset:0;background:linear-gradient(150deg,#0F2440 0%,#1B3A5C 55%,#0A7A70 135%);z-index:8500;display:none;overflow-y:auto;padding:52px 6vw 70px;}
+.pres-overlay{position:fixed;inset:0;background:#fff;z-index:8500;display:none;overflow-y:auto;padding:56px 6vw 72px;}
 .pres-overlay.show{display:block;}
-.pres-close{position:fixed;top:16px;right:18px;background:rgba(255,255,255,.14);border:none;color:#fff;padding:9px 16px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;z-index:8510;}
-.pres-close:hover{background:rgba(255,255,255,.28);}
-.pres-eyebrow{color:var(--teal-light);font-size:12.5px;font-weight:700;letter-spacing:1.5px;margin-bottom:12px;}
-.pres-title{color:#fff;font-size:clamp(21px,3.4vw,33px);font-weight:900;line-height:1.35;margin-bottom:24px;}
-.pres-sep{color:var(--teal-light);margin:0 6px;}
-.pres-body{color:rgba(255,255,255,.96);font-size:clamp(15px,1.8vw,19px);line-height:2;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:24px 28px;margin-bottom:8px;white-space:pre-wrap;}
-.pres-sec{color:#FCD34D;font-size:14px;font-weight:800;letter-spacing:1px;margin:26px 0 12px;}
-.pres-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:12px;}
-.pres-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:16px 18px;}
-.pres-card-j{color:var(--teal-light);font-size:11.5px;font-weight:800;margin-bottom:7px;}
-.pres-card-f{color:#fff;font-size:clamp(13.5px,1.5vw,16px);line-height:1.7;font-weight:600;}
+.pres-inner{max-width:1080px;margin:0 auto;}
+.pres-tools{position:fixed;top:14px;right:16px;display:flex;gap:7px;z-index:8510;}
+.pres-close,.pres-pdf{border:1.5px solid var(--border);background:#fff;color:var(--text-mid);padding:9px 16px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 2px 8px rgba(15,36,64,.08);}
+.pres-close:hover{border-color:var(--navy);color:var(--navy);}
+.pres-pdf{background:var(--navy);border-color:var(--navy);color:#fff;}
+.pres-pdf:hover{background:#1B3A5C;}
+.pres-head{border-bottom:3px solid var(--navy);padding-bottom:16px;margin-bottom:22px;}
+.pres-eyebrow{color:var(--teal-dark);font-size:12.5px;font-weight:800;letter-spacing:1.5px;margin-bottom:10px;}
+.pres-title{color:var(--navy);font-size:clamp(22px,3.4vw,34px);font-weight:900;line-height:1.35;}
+.pres-sep{color:var(--teal);margin:0 8px;}
+.pres-body{color:#111827;font-size:clamp(15px,1.75vw,19px);line-height:1.95;background:#F8FAFC;border:1px solid var(--border);border-left:5px solid var(--teal);border-radius:10px;padding:22px 26px;margin-bottom:6px;white-space:pre-wrap;}
+.pres-sec{color:var(--navy);font-size:14.5px;font-weight:800;letter-spacing:.6px;margin:28px 0 13px;padding-left:11px;border-left:5px solid var(--amber);}
+.pres-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:13px;}
+.pres-card{background:#fff;border:1px solid var(--border);border-top:4px solid var(--teal);border-radius:10px;padding:16px 18px;box-shadow:0 1px 3px rgba(15,36,64,.05);}
+.pres-card-j{color:var(--teal-dark);font-size:11.5px;font-weight:800;margin-bottom:7px;font-family:'JetBrains Mono',monospace;}
+.pres-card-f{color:#1F2937;font-size:clamp(13.5px,1.5vw,16px);line-height:1.7;font-weight:600;}
 .pres-gl{display:flex;flex-wrap:wrap;gap:8px;}
-.pres-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);color:#fff;padding:7px 14px;border-radius:18px;font-size:12.5px;font-weight:700;}
+.pres-pill{background:var(--teal-light);border:1px solid #5EEAD4;color:var(--teal-dark);padding:7px 15px;border-radius:18px;font-size:12.5px;font-weight:700;}
+.pres-foot{margin-top:30px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);line-height:1.7;}
 /* ── Print leaflet (A4 one-pager) ── */
 #printSheet{display:none;}
 .ps-top{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px solid #0F2440;padding-bottom:8px;margin-bottom:12px;}
@@ -275,11 +312,31 @@ table.ft tr:hover td{background:#F0FDFA;}
 .ps-refs li{margin-bottom:3px;}
 .ps-gl{font-size:8.5pt;line-height:1.6;color:#222;padding-left:16px;margin:4px 0;list-style:disc;}
 .ps-foot{margin-top:14px;padding-top:8px;border-top:1px solid #999;font-size:7.5pt;color:#666;}
+@page{margin:13mm;}
+@page presPage{size:A4 landscape;margin:11mm;}
 @media print{
-  @page{margin:13mm;}
-  body *{visibility:hidden;}
-  #printSheet,#printSheet *{visibility:visible;}
-  #printSheet{display:block;position:absolute;top:0;left:0;width:100%;}
+  html,body{background:#fff !important;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+  /* 리플렛 인쇄 (기본) */
+  body:not(.print-pres) *{visibility:hidden;}
+  body:not(.print-pres) #printSheet,body:not(.print-pres) #printSheet *{visibility:visible;}
+  body:not(.print-pres) #printSheet{display:block;position:absolute;top:0;left:0;width:100%;}
+  /* 발표 모드 PDF */
+  body.print-pres *{visibility:hidden;}
+  body.print-pres .pres-overlay,body.print-pres .pres-overlay *{visibility:visible;}
+  body.print-pres .pres-overlay{page:presPage;display:block !important;position:absolute;top:0;left:0;right:auto;bottom:auto;width:100%;height:auto;overflow:visible;padding:0;background:#fff !important;}
+  body.print-pres .pres-inner{max-width:none;}
+  body.print-pres .pres-tools{display:none !important;}
+  body.print-pres .pres-title{font-size:25pt;}
+  body.print-pres .pres-eyebrow{font-size:10pt;}
+  body.print-pres .pres-body{font-size:12pt;line-height:1.85;background:#F8FAFC !important;page-break-inside:avoid;}
+  body.print-pres .pres-sec{font-size:12pt;page-break-after:avoid;}
+  body.print-pres .pres-cards{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  body.print-pres .pres-card{page-break-inside:avoid;box-shadow:none;}
+  body.print-pres .pres-card-j{font-size:9pt;}
+  body.print-pres .pres-card-f{font-size:10.5pt;}
+  body.print-pres .pres-pill{font-size:9.5pt;background:#CCFBF1 !important;}
+  body.print-pres .pres-foot{font-size:8pt;}
 }
 /* ── Mobile drawer & touch optimization ── */
 .ref-fab{display:none;}
@@ -347,7 +404,7 @@ table.ft tr:hover td{background:#F0FDFA;}
 </div>
 <header class="app-header">
   <h1>실시간 원격 심전도 감시 처방 근거 <span>— 진료과·환자군별 임상 근거 및 학회 가이드라인 (EX871)</span></h1>
-  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v6.2 Pro</span></div>
+  <div class="hdr-badges"><span class="b">EX871</span><span class="b v">v7.1 Pro</span></div>
 </header>
 <div class="app-body">
 <aside class="ref-panel">
@@ -366,7 +423,7 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div id="refList"></div>
 </aside>
 <main class="gen-panel">
-  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v6.2 Pro</span></div>
+  <div class="gen-title">환자군별 처방 명분 생성기 <span style="font-size:11px;font-weight:600;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:4px;margin-left:6px;vertical-align:middle;">v7.1 Pro</span></div>
   <div class="gen-sub">진료과 → 환자군 → 증상 → 위험요소를 선택하면 기술 명세서 적응증 기반 처방 명분이 자동 생성됩니다. 환자군·증상 선택 시 관련 학회 가이드라인 권고사항이 처방 명분 영역에 함께 표시됩니다.</div>
 
   <div class="stats">
@@ -433,17 +490,26 @@ table.ft tr:hover td{background:#F0FDFA;}
   <div class="adm-card">
     <div class="adm-hdr">
       <span style="font-size:17px">📊</span>
-      <span class="adm-t">접속 로그 통계</span>
-      <span class="adm-badge">관리자</span>
+      <span class="adm-t" id="admTitle">관리자</span>
+      <span class="adm-badge">MKT</span>
       <button class="adm-x" onclick="closeAdmin()">✕ 닫기</button>
     </div>
-    <div class="adm-body" id="admBody"></div>
+    <div class="adm-body">
+      <div class="rv-tabs">
+        <button class="rv-tab on" id="tabStats" onclick="admTab('stats')">📊 접속 통계</button>
+        <button class="rv-tab" id="tabReview" onclick="admTab('review')">📝 논문 검토<span class="n" id="tabReviewN"></span></button>
+      </div>
+      <div id="admBody"></div>
+    </div>
   </div>
 </div>
 <button class="ref-fab" onclick="toggleRefDrawer()">📚 근거 논문</button>
 <div class="ref-scrim" id="refScrim" onclick="toggleRefDrawer()"></div>
 <div class="pres-overlay" id="presOverlay">
-  <button class="pres-close" onclick="closePresent()">✕ 닫기</button>
+  <div class="pres-tools">
+    <button class="pres-pdf" onclick="printPresent()">📄 PDF 저장</button>
+    <button class="pres-close" onclick="closePresent()">✕ 닫기</button>
+  </div>
   <div class="pres-inner" id="presInner"></div>
 </div>
 <div id="printSheet"></div>
@@ -547,12 +613,25 @@ function doLogin(){
 // ════════════════════════════════════════════
 // ADMIN — 접속 로그 통계 대시보드
 // ════════════════════════════════════════════
+let _admTab='stats';
+function admTab(t){
+  _admTab=t;
+  document.getElementById('tabStats').classList.toggle('on', t==='stats');
+  document.getElementById('tabReview').classList.toggle('on', t==='review');
+  document.getElementById('admTitle').textContent = t==='stats' ? '접속 로그 통계' : '신규 논문 검토';
+  if(t==='stats') loadStats(); else loadReview();
+}
+
 function openAdmin(){
   const ov = document.getElementById('admOverlay');
-  const body = document.getElementById('admBody');
-  body.innerHTML = '<div class="adm-msg">통계를 불러오는 중…</div>';
   ov.classList.add('show');
   document.body.style.overflow='hidden';
+  admTab(_admTab);
+}
+
+function loadStats(){
+  const body = document.getElementById('admBody');
+  body.innerHTML = '<div class="adm-msg">통계를 불러오는 중…</div>';
 
   fetch(SB_URL + '/rest/v1/rpc/get_tool_access_stats', {
     method:'POST', headers: sbHeaders(), body: JSON.stringify({p_key: ADMIN_CODE, p_tool: TOOL_ID})
@@ -569,6 +648,106 @@ function closeAdmin(){
   document.body.style.overflow='';
 }
 
+// ════════════════════════════════════════════
+// 신규 논문 검토 워크벤치
+// ════════════════════════════════════════════
+let _rvItems=[], _rvStatus='pending';
+
+function loadReview(){
+  const body=document.getElementById('admBody');
+  body.innerHTML='<div class="adm-msg">검토 목록을 불러오는 중…</div>';
+  fetch(SB_URL+'/rest/v1/rpc/get_ex871_review_queue',{
+    method:'POST', headers:sbHeaders(),
+    body: JSON.stringify({p_key: ADMIN_CODE, p_status: _rvStatus})
+  })
+  .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(function(d){ renderReview(d); })
+  .catch(function(e){ body.innerHTML='<div class="adm-msg">불러오지 못했습니다.<br><span style="font-size:11px;opacity:.7">'+(e.message||e)+'</span></div>'; });
+}
+
+function rvSetFilter(v){ _rvStatus=v; loadReview(); }
+
+function renderReview(d){
+  const body=document.getElementById('admBody');
+  const c=d.counts||{};
+  const pend=c.pending||0, appr=c.approved||0, rej=c.rejected||0;
+  const tot=pend+appr+rej;
+  _rvItems=d.items||[];
+  const tn=document.getElementById('tabReviewN');
+  if(tn) tn.textContent = pend ? '('+pend+')' : '';
+
+  let h='<div class="rv-note">📌 검토 후 <strong>반영</strong>을 누른 논문만 도구에 노출됩니다. 승인된 항목은 다음 접속부터 해당 환자군의 근거 문헌에 자동으로 추가됩니다. 원문은 PubMed·Scholar 링크로 확인하세요.</div>';
+  h+='<div class="adm-kpis">'
+   + '<div class="adm-kpi"><div class="k-l">전체</div><div class="k-v">'+tot+'<span class="k-u">편</span></div></div>'
+   + '<div class="adm-kpi"><div class="k-l">검토 대기</div><div class="k-v">'+pend+'<span class="k-u">편</span></div></div>'
+   + '<div class="adm-kpi hi"><div class="k-l">반영됨</div><div class="k-v">'+appr+'<span class="k-u">편</span></div></div>'
+   + '<div class="adm-kpi"><div class="k-l">제외</div><div class="k-v">'+rej+'<span class="k-u">편</span></div></div>'
+   + '</div>';
+  const pct = tot ? Math.round((appr+rej)/tot*100) : 0;
+  h+='<div class="rv-prog"><i style="width:'+pct+'%"></i></div>';
+  h+='<div class="rv-filter"><select onchange="rvSetFilter(this.value)">'
+   + '<option value="pending"'+(_rvStatus==='pending'?' selected':'')+'>검토 대기만 ('+pend+')</option>'
+   + '<option value="approved"'+(_rvStatus==='approved'?' selected':'')+'>반영됨 ('+appr+')</option>'
+   + '<option value="rejected"'+(_rvStatus==='rejected'?' selected':'')+'>제외 ('+rej+')</option>'
+   + '<option value="all"'+(_rvStatus==='all'?' selected':'')+'>전체 ('+tot+')</option>'
+   + '</select></div>';
+
+  if(!_rvItems.length){
+    h+='<div class="rv-empty">해당 상태의 논문이 없습니다.</div>';
+    body.innerHTML=h; return;
+  }
+  _rvItems.forEach(function(it,i){
+    const q=encodeURIComponent(it.title||'');
+    h+='<div class="rv-item '+(it.status==='approved'?'approved':(it.status==='rejected'?'rejected':''))+'" id="rv'+it.id+'">'
+     + '<div class="rv-loc">'+it.dept+'<span class="sep">›</span>'+it.patient_group+'</div>'
+     + '<div class="rv-t">'+it.title+'</div>'
+     + '<div class="rv-j">'+(it.journal||'')+' · '+(it.pub_year||'')+'</div>'
+     + '<div class="rv-f">'+(it.finding||'')+'</div>'
+     + '<div class="rv-acts">'
+     + '<a class="rv-b lnk" target="_blank" rel="noopener" href="https://pubmed.ncbi.nlm.nih.gov/?term='+q+'">🔍 PubMed</a>'
+     + '<a class="rv-b lnk" target="_blank" rel="noopener" href="https://scholar.google.com/scholar?q='+q+'">🎓 Scholar</a>'
+     + '<button class="rv-b ok'+(it.status==='approved'?' on':'')+'" onclick="rvMark('+it.id+',\'approved\')">✓ 반영</button>'
+     + '<button class="rv-b no'+(it.status==='rejected'?' on':'')+'" onclick="rvMark('+it.id+',\'rejected\')">✕ 제외</button>'
+     + (it.status!=='pending' ? '<button class="rv-b" onclick="rvMark('+it.id+',\'pending\')">↩ 되돌리기</button>' : '')
+     + '<span class="rv-st '+it.status+'">'+(it.status==='approved'?'반영됨':(it.status==='rejected'?'제외':'검토 대기'))+'</span>'
+     + '</div></div>';
+  });
+  body.innerHTML=h;
+}
+
+function rvMark(id, st){
+  fetch(SB_URL+'/rest/v1/rpc/review_ex871_ref',{
+    method:'POST', headers:sbHeaders(),
+    body: JSON.stringify({p_key: ADMIN_CODE, p_id: id, p_status: st})
+  })
+  .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(function(){
+    showToastMsg(st==='approved' ? '반영했습니다 (새로고침 후 도구에 노출)' : (st==='rejected' ? '제외했습니다' : '검토 대기로 되돌렸습니다'));
+    loadReview();
+  })
+  .catch(function(e){ showToastMsg('처리 실패: '+(e.message||e)); });
+}
+
+// ════════════════════════════════════════════
+// 승인된 논문을 DATA에 병합
+// ════════════════════════════════════════════
+function mergeApprovedRefs(){
+  return fetch(SB_URL+'/rest/v1/ex871_ref_reviews?select=dept,patient_group,title,journal,pub_year,finding&status=eq.approved&tool=eq.'+TOOL_ID, {headers: sbHeaders()})
+  .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(function(rows){
+    let n=0;
+    (rows||[]).forEach(function(x){
+      const d=DATA[x.dept]; if(!d) return;
+      const g=d.groups[x.patient_group]; if(!g) return;
+      if(g.refs.some(function(r){ return r.title===x.title; })) return;
+      g.refs.push({title:x.title, journal:x.journal, year:x.pub_year, finding:x.finding});
+      n++;
+    });
+    return n;
+  })
+  .catch(function(){ return 0; });
+}
+
 function fmtDT(iso){
   if(!iso) return '—';
   try{
@@ -583,19 +762,27 @@ function renderAdmin(d){
   if(!d || typeof d.total === 'undefined'){
     body.innerHTML = '<div class="adm-msg">데이터 형식을 확인할 수 없습니다.</div>'; return;
   }
-  if(d.total === 0){
-    body.innerHTML = '<div class="adm-msg">아직 기록된 접속이 없습니다.<br><span style="font-size:11px;opacity:.7">로그인이 발생하면 이곳에 집계됩니다.</span></div>'
-      + '<div class="adm-note">📌 로그는 이 기능이 배포된 시점부터 쌓입니다. 이전 접속 이력은 기록되지 않았습니다.</div>';
+  if((typeof d.logged === 'number' ? d.logged : d.total) === 0){
+    body.innerHTML = '<div class="adm-msg">누적 접속 '+((d.baseline||0).toLocaleString('ko-KR'))+'회<br><span style="font-size:11px;opacity:.7">시스템 기록분은 아직 없습니다. 로그인이 발생하면 이곳에 집계됩니다.</span></div>'
+      + '<div class="adm-note">📌 이전 집계분은 기준값으로 반영되어 있으며, 일자별·코드별 상세는 시스템 기록이 쌓인 이후부터 표시됩니다.</div>';
     return;
   }
 
+  const bl = d.baseline || 0, lg = (typeof d.logged === 'number') ? d.logged : d.total;
+  const nf = function(n){ return (n||0).toLocaleString('ko-KR'); };
   let h = '<div class="adm-kpis">'
-    + '<div class="adm-kpi hi"><div class="k-l">총 로그인</div><div class="k-v">'+d.total+'<span class="k-u">회</span></div></div>'
-    + '<div class="adm-kpi"><div class="k-l">접속 코드 수</div><div class="k-v">'+d.unique_codes+'<span class="k-u">개</span></div></div>'
-    + '<div class="adm-kpi"><div class="k-l">오늘</div><div class="k-v">'+d.today+'<span class="k-u">회</span></div></div>'
-    + '<div class="adm-kpi"><div class="k-l">최근 7일</div><div class="k-v">'+d.last7+'<span class="k-u">회</span></div></div>'
-    + '<div class="adm-kpi"><div class="k-l">최근 30일</div><div class="k-v">'+d.last30+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi hi"><div class="k-l">누적 접속</div><div class="k-v">'+nf(d.total)+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">신규 집계분</div><div class="k-v">'+nf(lg)+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">접속 코드 수</div><div class="k-v">'+nf(d.unique_codes)+'<span class="k-u">개</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">오늘</div><div class="k-v">'+nf(d.today)+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">최근 7일</div><div class="k-v">'+nf(d.last7)+'<span class="k-u">회</span></div></div>'
+    + '<div class="adm-kpi"><div class="k-l">최근 30일</div><div class="k-v">'+nf(d.last30)+'<span class="k-u">회</span></div></div>'
     + '</div>';
+  if(bl){
+    h += '<div style="margin:-8px 0 16px;font-size:10.5px;color:var(--text-muted);line-height:1.6;">'
+      + '누적 접속 = 이전 집계분 <strong>'+nf(bl)+'회</strong> + 시스템 기록 <strong>'+nf(lg)+'회</strong>. '
+      + '일자별 추이는 시스템 기록분만 표시됩니다.</div>';
+  }
 
   const days = d.by_day || [];
   if(days.length){
@@ -630,8 +817,7 @@ function renderAdmin(d){
     h += '</div>';
   }
 
-  h += '<div class="adm-note">📌 집계 기간: '+fmtDT(d.first_at)+' ~ '+fmtDT(d.last_at)+'<br>'
-    + '· 관리자 코드(MKTMKT) 접속은 집계에서 제외됩니다.<br>'
+  h += '<div class="adm-note">📌 관리자 코드 접속은 집계에서 제외됩니다.<br>'
     + '· IP 주소는 저장하지 않으며, 로그인 시점·코드·기기 종류만 기록됩니다.</div>';
 
   body.innerHTML = h;
@@ -2605,7 +2791,7 @@ function generate(){
     specText = '각종 심혈관계 증상 발생 시 심전도 이상소견의 일치 유무를 판정하고, 무증상 심근허혈 및 부정맥의 조기 포착을 위해';
   }
 
-  let closing = ' 입원 기간 중 24시간 실시간 침상 심전도 감시(EX871)를 시행함.';
+  let closing = ' 연속 실시간 심전도 감시를 시행함.';
 
   let finalText = mainText + ',\n' + specText + closing;
 
@@ -2807,8 +2993,8 @@ function openPresent(){
   if(!selDept||!selGroup){ showToastMsg('환자군을 먼저 선택해 주세요'); return; }
   const gData = DATA[selDept].groups[selGroup];
   const gl = getRelevantGuidelines(selDept, selGroup);
-  let h = `<div class="pres-eyebrow">EX871 · 실시간 원격 심전도 감시 처방 근거</div>`;
-  h += `<div class="pres-title">${selDept}<span class="pres-sep">›</span>${selGroup}</div>`;
+  let h = `<div class="pres-head"><div class="pres-eyebrow">EX871 · 실시간 원격 심전도 감시 처방 근거</div>`;
+  h += `<div class="pres-title">${selDept}<span class="pres-sep">›</span>${selGroup}</div></div>`;
   h += `<div class="pres-body">${_lastText || gData.core}</div>`;
   h += `<div class="pres-sec">📊 핵심 근거</div><div class="pres-cards">`;
   gData.refs.slice(0,4).forEach(r=>{
@@ -2820,6 +3006,7 @@ function openPresent(){
     gl.slice(0,6).forEach(g=>{ h += `<span class="pres-pill">${g.org} ${g.year}${g.class ? ' · ' + g.class : ''}</span>`; });
     h += `</div>`;
   }
+  h += `<div class="pres-foot">본 자료는 의료진의 임상적 판단을 돕기 위한 근거 정리 자료입니다. 처방 여부의 최종 판단은 담당 의료진에게 있습니다.<br>출력일 ${new Date().toLocaleDateString('ko-KR')} · EX871 처방 근거 도구</div>`;
   document.getElementById('presInner').innerHTML = h;
   document.getElementById('presOverlay').classList.add('show');
   document.body.style.overflow='hidden';
@@ -2827,6 +3014,16 @@ function openPresent(){
 function closePresent(){
   document.getElementById('presOverlay').classList.remove('show');
   document.body.style.overflow='';
+}
+
+// 발표 화면을 벡터 PDF로 출력 (인쇄 대화상자 → "PDF로 저장")
+function printPresent(){
+  const ov=document.getElementById('presOverlay');
+  if(!ov || !ov.classList.contains('show')) return;
+  document.body.classList.add('print-pres');
+  const done=function(){ document.body.classList.remove('print-pres'); window.removeEventListener('afterprint',done); };
+  window.addEventListener('afterprint',done);
+  setTimeout(function(){ window.print(); setTimeout(done,1200); },60);
 }
 document.addEventListener('keydown', function(e){
   if(e.key==='Escape'){
@@ -2874,7 +3071,13 @@ function toggleRefDrawer(){
 }
 
 renderQuickAccess();
-init();
+mergeApprovedRefs().then(function(n){
+  init();
+  if(n>0){
+    renderRefPanel(); renderFullTable(); updateStats();
+    if(selDept && selGroup) generate();
+  }
+});
 </script>
 </body>
 </html>
